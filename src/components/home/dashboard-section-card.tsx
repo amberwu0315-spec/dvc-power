@@ -8,6 +8,7 @@ export interface DashboardSectionCardProps {
   description?: string
   children: ReactNode
   className?: string
+  variant?: "default" | "judgment" | "list"
   headerClassName?: string
   titleClassName?: string
   descriptionClassName?: string
@@ -20,12 +21,27 @@ export function DashboardSectionCard({
   description,
   children,
   className,
+  variant = "default",
   headerClassName,
   titleClassName,
   descriptionClassName,
   contentClassName,
   headerAside,
 }: DashboardSectionCardProps) {
+  const headerBaseClassName =
+    variant === "list"
+      ? "border-b border-border/50 pb-2"
+      : variant === "judgment"
+        ? "border-b border-border/50 pb-2"
+        : "border-b border-border/60 pb-2.5"
+
+  const contentBaseClassName =
+    variant === "list"
+      ? "flex-1 px-3 py-2.5"
+      : variant === "judgment"
+        ? "flex-1 px-3 py-2.5"
+        : "flex-1 px-3 py-3"
+
   return (
     <Card
       className={cn(
@@ -36,31 +52,39 @@ export function DashboardSectionCard({
     >
       <CardHeader
         className={cn(
-          "border-b border-border/60 pb-3",
-          headerAside && "gap-3 md:flex-row md:items-center md:justify-between",
+          headerBaseClassName,
+          headerAside &&
+            "grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2.5 gap-y-1",
           headerClassName
         )}
       >
-        <div className="min-w-0 space-y-1">
+        <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-0.5">
           <CardTitle
             className={cn(
-              "text-sm font-medium tracking-[0.04em] text-foreground/92",
+              "text-[0.95rem] leading-none font-medium tracking-[0.04em] text-foreground/92",
               titleClassName
             )}
           >
             {title}
           </CardTitle>
           {description ? (
-            <p className={cn("text-xs/6 text-muted-foreground", descriptionClassName)}>
+            <p
+              className={cn(
+                "min-w-0 text-[0.68rem] leading-4 text-muted-foreground",
+                descriptionClassName
+              )}
+            >
               {description}
             </p>
           ) : null}
         </div>
 
-        {headerAside ? <div className="shrink-0">{headerAside}</div> : null}
+        {headerAside ? (
+          <div className="shrink-0 justify-self-end">{headerAside}</div>
+        ) : null}
       </CardHeader>
 
-      <CardContent className={cn("flex-1 px-4 py-4", contentClassName)}>
+      <CardContent className={cn(contentBaseClassName, contentClassName)}>
         {children}
       </CardContent>
     </Card>

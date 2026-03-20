@@ -25,15 +25,14 @@ export function MonthlyTrendPanel({ data }: MonthlyTrendPanelProps) {
       title={HOMEPAGE_COPY.sections.monthlyTrend}
       description="近 12 个月总碳排变化"
       headerAside={
-        <span className="rounded-full border border-border/60 bg-background/24 px-2.5 py-1 text-[0.68rem] text-muted-foreground">
+        <span className="inline-flex items-center rounded-full border border-border/60 bg-background/24 px-2 py-0.5 text-[0.64rem] leading-4 text-muted-foreground">
           12 个月
         </span>
       }
-      headerClassName="pb-2.5"
-      descriptionClassName="text-[0.72rem] leading-5"
-      contentClassName="flex min-h-0 flex-col gap-3 px-3 py-3"
+      descriptionClassName="text-[0.68rem] leading-4"
+      contentClassName="flex min-h-0 flex-col gap-2.5 px-3 py-2.5"
     >
-      <div className="grid gap-2 rounded-xl border border-border/50 bg-background/18 px-3 py-2.5 sm:grid-cols-3">
+      <div className="grid gap-1.5 rounded-lg border border-border/50 bg-background/18 px-3 py-2 sm:grid-cols-3">
         <TrendSummaryItem label="统计月份" value={latest?.month ?? "--"} />
         <TrendSummaryItem
           label="本月总碳排"
@@ -47,20 +46,20 @@ export function MonthlyTrendPanel({ data }: MonthlyTrendPanelProps) {
         />
       </div>
 
-      <div className="flex min-h-0 flex-1 flex-col rounded-xl border border-border/50 bg-background/20 px-3 py-3">
-        <div className="mb-2 flex items-center justify-between gap-3 text-[0.68rem] text-muted-foreground">
+      <div className="flex min-h-0 flex-1 flex-col rounded-lg border border-border/50 bg-background/20 px-3 py-2.5">
+        <div className="mb-1.5 flex items-center justify-between gap-3 text-[0.64rem] leading-4 text-muted-foreground">
           <span>柱高映射月度总碳排</span>
           <span>单位：tCO2e</span>
         </div>
 
-        <div className="grid min-h-[13.5rem] flex-1 grid-cols-12 items-end gap-2">
+        <div className="grid min-h-[12rem] flex-1 grid-cols-12 items-end gap-1.5">
           {data.map((item, index) => {
             const height = `${Math.max((item.carbon / carbonMax) * 100, 18)}%`
 
             return (
               <div
                 key={item.month}
-                className="flex h-full flex-col justify-end gap-2"
+                className="flex h-full flex-col justify-end gap-1.5"
               >
                 <div
                   className={cn(
@@ -70,7 +69,7 @@ export function MonthlyTrendPanel({ data }: MonthlyTrendPanelProps) {
                   style={{ height }}
                   title={`${item.month} 碳排 ${item.carbon}`}
                 />
-                <div className="text-center text-[0.65rem] text-muted-foreground">
+                <div className="text-center text-[0.62rem] text-muted-foreground">
                   {item.month.slice(5)}
                 </div>
               </div>
@@ -103,15 +102,15 @@ function TrendSummaryItem({
         accent === "warm" && "text-amber-100"
       )}
     >
-      <div className="text-[0.68rem] tracking-[0.12em] text-muted-foreground uppercase">
+      <div className="text-[0.64rem] tracking-[0.12em] text-muted-foreground uppercase">
         {label}
       </div>
-      <div className="mt-1 flex min-w-0 items-end gap-2">
-        <div className="truncate text-lg font-semibold tracking-tight text-foreground">
+      <div className="mt-0.5 flex min-w-0 items-end gap-1.5">
+        <div className="truncate text-base font-semibold tracking-tight text-foreground">
           {value}
         </div>
         {suffix ? (
-          <div className="pb-0.5 text-[0.68rem] text-muted-foreground">
+          <div className="pb-0.5 text-[0.64rem] text-muted-foreground">
             {suffix}
           </div>
         ) : null}

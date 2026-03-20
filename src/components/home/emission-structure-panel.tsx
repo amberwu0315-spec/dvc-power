@@ -24,24 +24,23 @@ export function EmissionStructurePanel({ data }: EmissionStructurePanelProps) {
       title={HOMEPAGE_COPY.sections.emissionStructure}
       description="4 类排放来源占比"
       headerAside={
-        <div className="rounded-full border border-border/60 bg-background/24 px-2.5 py-1 text-[0.68rem] text-foreground/88">
+        <div className="inline-flex items-center rounded-full border border-border/60 bg-background/24 px-2 py-0.5 text-[0.64rem] leading-4 text-foreground/88">
           {new Intl.NumberFormat("zh-CN", {
             maximumFractionDigits: 0,
           }).format(total)}
           <span className="ml-1 text-muted-foreground">tCO2e</span>
         </div>
       }
-      headerClassName="pb-2.5"
-      descriptionClassName="text-[0.72rem] leading-5"
-      contentClassName="flex min-h-0 flex-col gap-3 px-3 py-3"
+      descriptionClassName="text-[0.68rem] leading-4"
+      contentClassName="flex min-h-0 flex-col gap-2.5 px-3 py-2.5"
     >
-      <div className="rounded-xl border border-border/50 bg-background/20 px-3 py-3">
-        <div className="flex items-center justify-between gap-3 text-[0.68rem] text-muted-foreground">
+      <div className="rounded-lg border border-border/50 bg-background/20 px-3 py-2.5">
+        <div className="flex items-center justify-between gap-3 text-[0.64rem] leading-4 text-muted-foreground">
           <span>排放构成总览</span>
           <span>{data.length} 类来源</span>
         </div>
 
-        <div className="mt-3 flex h-4 overflow-hidden rounded-full border border-white/10 bg-background/30">
+        <div className="mt-2.5 flex h-3.5 overflow-hidden rounded-full border border-white/10 bg-background/30">
           {data.map((item, index) => (
             <div
               key={item.category}
@@ -52,11 +51,11 @@ export function EmissionStructurePanel({ data }: EmissionStructurePanelProps) {
           ))}
         </div>
 
-        <div className="mt-3 space-y-2">
+        <div className="mt-2.5 space-y-1.5">
           {data.map((item, index) => (
             <div
               key={item.category}
-              className="grid grid-cols-[minmax(0,1fr)_minmax(90px,0.9fr)_auto] items-center gap-3 rounded-lg border border-white/6 bg-background/10 px-2.5 py-2"
+              className="grid grid-cols-[minmax(0,1fr)_minmax(72px,0.75fr)_auto] items-center gap-2.5 rounded-lg border border-white/6 bg-background/10 px-2.5 py-1.5"
             >
               <div className="inline-flex min-w-0 items-center gap-2">
                 <span
@@ -65,7 +64,7 @@ export function EmissionStructurePanel({ data }: EmissionStructurePanelProps) {
                     segmentClasses[index % segmentClasses.length]
                   )}
                 />
-                <span className="truncate text-sm font-medium text-foreground/92">
+                <span className="truncate text-[0.82rem] font-medium text-foreground/92">
                   {item.category}
                 </span>
               </div>
@@ -81,10 +80,10 @@ export function EmissionStructurePanel({ data }: EmissionStructurePanelProps) {
               </div>
 
               <div className="text-right">
-                <div className="text-sm font-medium text-foreground">
+                <div className="text-[0.82rem] font-medium text-foreground">
                   {item.percent.toFixed(1)}%
                 </div>
-                <div className="text-[0.68rem] text-muted-foreground">
+                <div className="text-[0.62rem] text-muted-foreground">
                   {new Intl.NumberFormat("zh-CN").format(item.value)} tCO2e
                 </div>
               </div>

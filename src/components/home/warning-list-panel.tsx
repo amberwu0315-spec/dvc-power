@@ -9,7 +9,8 @@ export interface WarningListPanelProps {
 }
 
 const levelToneClassName = {
-  danger: "border-rose-400/30 bg-rose-500/12 text-rose-200 hover:bg-rose-500/18",
+  danger:
+    "border-rose-400/30 bg-rose-500/12 text-rose-200 hover:bg-rose-500/18",
   warning:
     "border-amber-400/30 bg-amber-500/12 text-amber-200 hover:bg-amber-500/18",
   neutral:
@@ -17,47 +18,75 @@ const levelToneClassName = {
 } as const
 
 export function WarningListPanel({ items }: WarningListPanelProps) {
+  const topItems = items.slice(0, 3)
+  const moreCount = Math.max(items.length - topItems.length, 0)
+
   return (
     <DashboardSectionCard
       title={HOMEPAGE_COPY.sections.warnings}
-      description="右下区优先呈现预警等级、工厂、异常摘要与时间信息。"
-      contentClassName="space-y-3"
+      description="Top 3 异常摘要"
+      variant="list"
+      headerAside={
+        <div className="inline-flex items-center rounded-full border border-border/60 bg-background/24 px-2 py-0.5 text-[0.64rem] leading-4 text-muted-foreground">
+          Top {topItems.length}
+        </div>
+      }
+      descriptionClassName="text-[0.68rem] leading-4"
+      contentClassName="flex min-h-0 flex-col gap-2"
     >
-      {items.map((item) => {
-        const meta = WARNING_LEVEL_META[item.level]
+      <div className="space-y-1.5">
+        {topItems.map((item, index) => {
+          const meta = WARNING_LEVEL_META[item.level]
 
-        return (
-          <article
-            key={item.id}
-            className="rounded-xl border border-border/50 bg-background/20 p-3"
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <Badge
-                    variant="outline"
-                    className={cn(
-                      "border px-2.5 py-1 text-[0.65rem]",
-                      levelToneClassName[meta.tone]
-                    )}
-                  >
-                    {meta.label}
-                  </Badge>
-                  <span className="text-sm font-medium text-foreground/92">
-                    {item.factoryName}
-                  </span>
+          return (
+            <article
+              key={item.id}
+              className={cn(
+                "rounded-lg border px-2.5 py-2",
+                index === 0
+                  ? "border-rose-400/16 bg-rose-500/8"
+                  : "border-white/8 bg-background/14"
+              )}
+            >
+              <div className="flex items-start gap-2.5">
+                <Badge
+                  variant="outline"
+                  className={cn(
+                    "mt-0.5 border px-1.5 py-0 text-[0.6rem]",
+                    levelToneClassName[meta.tone]
+                  )}
+                >
+                  {meta.label}
+                </Badge>
+
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2">
+                    <span className="truncate text-[0.82rem] font-medium text-foreground/92">
+                      {item.factoryName}
+                    </span>
+                    <span className="truncate text-[0.68rem] text-muted-foreground">
+                      {item.warningType}
+                    </span>
+                    <span className="ml-auto shrink-0 text-[0.64rem] text-muted-foreground">
+                      {item.time}
+                    </span>
+                  </div>
+
+                  <p className="mt-1 text-[0.78rem] leading-[1.35] text-foreground/88">
+                    {item.message}
+                  </p>
                 </div>
-
-                <p className="text-sm/6 text-foreground/88">{item.message}</p>
               </div>
+            </article>
+          )
+        })}
+      </div>
 
-              <span className="shrink-0 text-xs text-muted-foreground">
-                {item.time}
-              </span>
-            </div>
-          </article>
-        )
-      })}
+      {moreCount > 0 ? (
+        <div className="rounded-lg border border-dashed border-border/50 bg-background/14 px-2.5 py-1.5 text-[0.68rem] leading-4 text-muted-foreground">
+          其他 {moreCount} 条预警收起展示
+        </div>
+      ) : null}
     </DashboardSectionCard>
   )
 }
