@@ -28,53 +28,46 @@ export function FactoryTablePanel({ rows }: FactoryTablePanelProps) {
   return (
     <DashboardSectionCard
       title={HOMEPAGE_COPY.sections.factoryTable}
-      description="底部区承接工厂级关键明细，保留 6 列核心字段，优先服务首页快速对比。"
+      headerAside={
+        <div className="rounded-full border border-border/60 bg-background/24 px-2.5 py-1 text-[0.68rem] text-muted-foreground">
+          共 {rows.length} 家工厂
+        </div>
+      }
       className="min-h-0"
-      contentClassName="flex min-h-0 flex-col gap-3"
+      headerClassName="pb-2.5"
+      contentClassName="flex min-h-0 flex-col px-0 py-0"
     >
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border/50 bg-background/20 px-4 py-3 text-xs text-muted-foreground">
-        <span>工厂关键指标对比</span>
-        <span>共 {rows.length} 个工厂对象</span>
-      </div>
-
-      <div className="min-h-0 flex-1 overflow-auto rounded-xl border border-border/50 bg-background/16">
-        <Table className="text-sm">
+      <div className="min-h-0 flex-1 overflow-hidden">
+        <span className="sr-only">工厂关键指标对比</span>
+        <Table className="text-[0.78rem]">
           <TableHeader>
             <TableRow className="border-border/60 hover:bg-transparent">
-              <TableHead className="pl-4">工厂</TableHead>
-              <TableHead>
-                <div className="space-y-0.5">
-                  <div>综合能耗</div>
-                  <div className="text-[0.68rem] font-normal text-muted-foreground">
-                    tce
-                  </div>
-                </div>
+              <TableHead className="h-9 pl-4">工厂</TableHead>
+              <TableHead className="h-9">
+                综合能耗
+                <span className="ml-1 text-[0.64rem] font-normal text-muted-foreground">
+                  tce
+                </span>
               </TableHead>
-              <TableHead>
-                <div className="space-y-0.5">
-                  <div>总碳排</div>
-                  <div className="text-[0.68rem] font-normal text-muted-foreground">
-                    tCO2e
-                  </div>
-                </div>
+              <TableHead className="h-9">
+                总碳排
+                <span className="ml-1 text-[0.64rem] font-normal text-muted-foreground">
+                  tCO2e
+                </span>
               </TableHead>
-              <TableHead>
-                <div className="space-y-0.5">
-                  <div>单位产值碳排</div>
-                  <div className="text-[0.68rem] font-normal text-muted-foreground">
-                    tCO2e/万元
-                  </div>
-                </div>
+              <TableHead className="h-9">
+                单位产值碳排
+                <span className="ml-1 text-[0.64rem] font-normal text-muted-foreground">
+                  tCO2e/万元
+                </span>
               </TableHead>
-              <TableHead>
-                <div className="space-y-0.5">
-                  <div>绿电占比</div>
-                  <div className="text-[0.68rem] font-normal text-muted-foreground">
-                    %
-                  </div>
-                </div>
+              <TableHead className="h-9">
+                绿电占比
+                <span className="ml-1 text-[0.64rem] font-normal text-muted-foreground">
+                  %
+                </span>
               </TableHead>
-              <TableHead className="pr-4">状态</TableHead>
+              <TableHead className="h-9 pr-4">状态</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -86,18 +79,22 @@ export function FactoryTablePanel({ rows }: FactoryTablePanelProps) {
                   key={row.id}
                   className="border-border/50 hover:bg-background/26"
                 >
-                  <TableCell className="pl-4 font-medium text-foreground/92">
+                  <TableCell className="py-2.5 pl-4 font-medium text-foreground/92">
                     {row.factoryName}
                   </TableCell>
-                  <TableCell>{formatNumber(row.energy)}</TableCell>
-                  <TableCell>{formatNumber(row.carbon)}</TableCell>
-                  <TableCell>{row.carbonPerOutput.toFixed(2)}</TableCell>
-                  <TableCell>{row.greenPowerRatio.toFixed(1)}</TableCell>
-                  <TableCell className="pr-4">
+                  <TableCell className="py-2.5">{formatNumber(row.energy)}</TableCell>
+                  <TableCell className="py-2.5">{formatNumber(row.carbon)}</TableCell>
+                  <TableCell className="py-2.5">
+                    {row.carbonPerOutput.toFixed(2)}
+                  </TableCell>
+                  <TableCell className="py-2.5">
+                    {row.greenPowerRatio.toFixed(1)}
+                  </TableCell>
+                  <TableCell className="py-2.5 pr-4">
                     <Badge
                       variant="outline"
                       className={cn(
-                        "border px-2.5 py-1 text-[0.65rem]",
+                        "border px-2 py-0.5 text-[0.65rem]",
                         statusToneClassName[statusMeta.tone]
                       )}
                     >
