@@ -32,7 +32,7 @@ export function FactoryTablePanel({ rows }: FactoryTablePanelProps) {
       contentClassName="space-y-4"
     >
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border/50 bg-background/20 px-4 py-3 text-xs text-muted-foreground">
-        <span>当前展示字段：工厂、综合能耗、总碳排、单位产值碳排、绿电占比、状态</span>
+        <span>工厂关键指标对比</span>
         <span>共 {rows.length} 个工厂对象</span>
       </div>
 
@@ -41,10 +41,38 @@ export function FactoryTablePanel({ rows }: FactoryTablePanelProps) {
           <TableHeader>
             <TableRow className="border-border/60 hover:bg-transparent">
               <TableHead className="pl-4">工厂</TableHead>
-              <TableHead>综合能耗</TableHead>
-              <TableHead>总碳排</TableHead>
-              <TableHead>单位产值碳排</TableHead>
-              <TableHead>绿电占比</TableHead>
+              <TableHead>
+                <div className="space-y-0.5">
+                  <div>综合能耗</div>
+                  <div className="text-[0.68rem] font-normal text-muted-foreground">
+                    tce
+                  </div>
+                </div>
+              </TableHead>
+              <TableHead>
+                <div className="space-y-0.5">
+                  <div>总碳排</div>
+                  <div className="text-[0.68rem] font-normal text-muted-foreground">
+                    tCO2e
+                  </div>
+                </div>
+              </TableHead>
+              <TableHead>
+                <div className="space-y-0.5">
+                  <div>单位产值碳排</div>
+                  <div className="text-[0.68rem] font-normal text-muted-foreground">
+                    tCO2e/万元
+                  </div>
+                </div>
+              </TableHead>
+              <TableHead>
+                <div className="space-y-0.5">
+                  <div>绿电占比</div>
+                  <div className="text-[0.68rem] font-normal text-muted-foreground">
+                    %
+                  </div>
+                </div>
+              </TableHead>
               <TableHead className="pr-4">状态</TableHead>
             </TableRow>
           </TableHeader>
@@ -60,10 +88,10 @@ export function FactoryTablePanel({ rows }: FactoryTablePanelProps) {
                   <TableCell className="pl-4 font-medium text-foreground/92">
                     {row.factoryName}
                   </TableCell>
-                  <TableCell>{formatNumber(row.energy)} tce</TableCell>
-                  <TableCell>{formatNumber(row.carbon)} tCO2e</TableCell>
-                  <TableCell>{row.carbonPerOutput.toFixed(2)} tCO2e/万元</TableCell>
-                  <TableCell>{row.greenPowerRatio.toFixed(1)}%</TableCell>
+                  <TableCell>{formatNumber(row.energy)}</TableCell>
+                  <TableCell>{formatNumber(row.carbon)}</TableCell>
+                  <TableCell>{row.carbonPerOutput.toFixed(2)}</TableCell>
+                  <TableCell>{row.greenPowerRatio.toFixed(1)}</TableCell>
                   <TableCell className="pr-4">
                     <Badge
                       variant="outline"

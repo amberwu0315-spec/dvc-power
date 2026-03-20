@@ -18,9 +18,9 @@ export function FactoryRankingPanel({ data }: FactoryRankingPanelProps) {
       contentClassName="space-y-3"
     >
       <div className="flex items-center justify-between rounded-xl border border-border/50 bg-background/20 px-3 py-2 text-xs text-muted-foreground">
-        <span>默认排序指标</span>
+        <span>按{FACTORY_RANKING_META.metricLabel}由高到低</span>
         <span className="font-medium text-foreground/90">
-          {FACTORY_RANKING_META.metricLabel} / {FACTORY_RANKING_META.unit}
+          单位 {FACTORY_RANKING_META.unit}
         </span>
       </div>
 

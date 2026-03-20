@@ -10,9 +10,9 @@ export function HomePageHeader({ meta }: HomePageHeaderProps) {
   return (
     <Card className="stack-card border border-border/60 bg-card/88 shadow-2xl shadow-black/20">
       <CardContent className="grid gap-4 px-5 py-5 md:grid-cols-[minmax(0,1fr)_minmax(220px,0.9fr)_minmax(220px,0.85fr)] md:items-center lg:px-6">
-        <div className="space-y-2">
-          <div className="text-[0.68rem] font-medium tracking-[0.24em] text-muted-foreground uppercase">
-            页面标题
+        <div className="space-y-2.5">
+          <div className="text-[0.68rem] font-medium tracking-[0.24em] text-cyan-100/72 uppercase">
+            制造业能碳驾驶舱
           </div>
           <div>
             <h1 className="font-heading text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
@@ -22,12 +22,10 @@ export function HomePageHeader({ meta }: HomePageHeaderProps) {
         </div>
 
         <div className="space-y-2 md:text-center">
-          <div className="text-[0.68rem] font-medium tracking-[0.24em] text-muted-foreground uppercase">
-            主体名称
-          </div>
           <p className="text-lg font-medium tracking-[0.02em] text-foreground/92 sm:text-xl">
             {meta.entityName}
           </p>
+          <p className="text-sm text-muted-foreground">园区 / 集团能碳总览</p>
         </div>
 
         <div className="grid gap-3 rounded-xl border border-border/60 bg-background/30 p-4 md:justify-self-end">
