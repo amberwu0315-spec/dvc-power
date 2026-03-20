@@ -1,5 +1,8 @@
-import { DashboardSectionCard } from "@/components/home/dashboard-section-card"
 import { HomePageHeader } from "@/components/home/home-page-header"
+import { DashboardSectionCard } from "@/components/home/dashboard-section-card"
+import { EmissionStructurePanel } from "@/components/home/emission-structure-panel"
+import { KpiOverviewPanel } from "@/components/home/kpi-overview-panel"
+import { MonthlyTrendPanel } from "@/components/home/monthly-trend-panel"
 import { FACTORY_RANKING_META, HOMEPAGE_COPY } from "@/lib/homepage/constants"
 import type { HomepageDashboardData } from "@/lib/homepage/types"
 
@@ -15,58 +18,11 @@ export function HomePageScreen({ data }: HomePageScreenProps) {
 
         <section className="grid gap-4 xl:grid-cols-[minmax(280px,0.92fr)_minmax(440px,1.28fr)_minmax(300px,0.96fr)]">
           <div className="grid gap-4">
-            <DashboardSectionCard
-              title={HOMEPAGE_COPY.sections.monthlyTrend}
-              description="左上区占位，后续承接月度能耗与碳排双折线图。"
-            >
-              <SectionPlaceholder
-                summary={`已接入 ${data.monthlyTrend.length} 个月趋势数据`}
-                details="后续在这里渲染能耗与碳排的月度变化曲线。"
-              />
-            </DashboardSectionCard>
-
-            <DashboardSectionCard
-              title={HOMEPAGE_COPY.sections.emissionStructure}
-              description="左下区占位，后续承接排放来源构成分析。"
-            >
-              <SectionPlaceholder
-                summary={`已接入 ${data.emissionStructure.length} 类排放来源`}
-                details="后续在这里渲染环图或堆叠柱图，并展示结构占比。"
-              />
-            </DashboardSectionCard>
+            <MonthlyTrendPanel data={data.monthlyTrend} />
+            <EmissionStructurePanel data={data.emissionStructure} />
           </div>
 
-          <DashboardSectionCard
-            title={HOMEPAGE_COPY.sections.kpiOverview}
-            description="中间核心区先承接 4 个 KPI 卡片，后续再补图表和状态样式。"
-            className="min-h-[24rem]"
-            contentClassName="grid gap-3 sm:grid-cols-2"
-          >
-            {data.kpis.map((metric) => (
-              <article
-                key={metric.key}
-                className="rounded-xl border border-border/60 bg-background/30 p-4"
-              >
-                <div className="text-[0.72rem] font-medium tracking-[0.12em] text-muted-foreground uppercase">
-                  {metric.label}
-                </div>
-                <div className="mt-4 flex items-end justify-between gap-3">
-                  <div>
-                    <div className="text-2xl font-semibold tracking-tight text-foreground">
-                      {metric.value}
-                    </div>
-                    <div className="mt-1 text-xs text-muted-foreground">
-                      单位：{metric.unit}
-                    </div>
-                  </div>
-                  <div className="space-y-1 text-right text-xs text-muted-foreground">
-                    <div>同比 {metric.yoy}%</div>
-                    <div>较上月 {metric.mom}%</div>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </DashboardSectionCard>
+          <KpiOverviewPanel metrics={data.kpis} />
 
           <div className="grid gap-4">
             <DashboardSectionCard

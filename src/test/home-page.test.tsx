@@ -31,7 +31,12 @@ describe("HomePage", () => {
     expect(screen.getByText(HOMEPAGE_COPY.sections.warnings)).toBeDefined()
     expect(screen.getByText(HOMEPAGE_COPY.sections.factoryTable)).toBeDefined()
 
-    expect(screen.getByText("已接入 12 个月趋势数据")).toBeDefined()
+    expect(screen.getByText("综合能耗")).toBeDefined()
+    expect(screen.getByText("总碳排")).toBeDefined()
+    expect(screen.getByText("单位产值碳排")).toBeDefined()
+    expect(screen.getByText("绿电占比")).toBeDefined()
+    expect(screen.getByText("统计月份")).toBeDefined()
+    expect(screen.getByText("排放构成总览")).toBeDefined()
     expect(screen.getByText("当前完成率 81.9%")).toBeDefined()
     expect(screen.getByText("已接入 5 行工厂明细数据")).toBeDefined()
   })
