@@ -1,9 +1,12 @@
 import { HomePageHeader } from "@/components/home/home-page-header"
 import { DashboardSectionCard } from "@/components/home/dashboard-section-card"
 import { EmissionStructurePanel } from "@/components/home/emission-structure-panel"
+import { FactoryRankingPanel } from "@/components/home/factory-ranking-panel"
+import { GoalProgressPanel } from "@/components/home/goal-progress-panel"
 import { KpiOverviewPanel } from "@/components/home/kpi-overview-panel"
 import { MonthlyTrendPanel } from "@/components/home/monthly-trend-panel"
-import { FACTORY_RANKING_META, HOMEPAGE_COPY } from "@/lib/homepage/constants"
+import { WarningListPanel } from "@/components/home/warning-list-panel"
+import { HOMEPAGE_COPY } from "@/lib/homepage/constants"
 import type { HomepageDashboardData } from "@/lib/homepage/types"
 
 export interface HomePageScreenProps {
@@ -25,35 +28,9 @@ export function HomePageScreen({ data }: HomePageScreenProps) {
           <KpiOverviewPanel metrics={data.kpis} />
 
           <div className="grid gap-4">
-            <DashboardSectionCard
-              title={HOMEPAGE_COPY.sections.factoryRanking}
-              description={`右上区占位，默认按${FACTORY_RANKING_META.metricLabel}排序。`}
-            >
-              <SectionPlaceholder
-                summary={`已接入 ${data.factoryRanking.length} 个工厂排行对象`}
-                details={`后续在这里渲染按${FACTORY_RANKING_META.metricLabel}排序的横向条形图。`}
-              />
-            </DashboardSectionCard>
-
-            <DashboardSectionCard
-              title={HOMEPAGE_COPY.sections.goalProgress}
-              description="右中区占位，后续承接年度双碳目标达成进度。"
-            >
-              <SectionPlaceholder
-                summary={`当前完成率 ${data.goalProgress.completionRate}%`}
-                details="后续在这里渲染目标值、当前值、差值与环形进度表现。"
-              />
-            </DashboardSectionCard>
-
-            <DashboardSectionCard
-              title={HOMEPAGE_COPY.sections.warnings}
-              description="右下区占位，后续承接预警列表与状态标签。"
-            >
-              <SectionPlaceholder
-                summary={`当前有 ${data.warnings.length} 条预警记录`}
-                details="后续在这里渲染预警等级、异常摘要与时间信息。"
-              />
-            </DashboardSectionCard>
+            <FactoryRankingPanel data={data.factoryRanking} />
+            <GoalProgressPanel data={data.goalProgress} />
+            <WarningListPanel items={data.warnings} />
           </div>
         </section>
 
