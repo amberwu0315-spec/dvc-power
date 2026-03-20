@@ -15,7 +15,12 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "TanStack Start Starter",
+        title: "DVS Power",
+      },
+      {
+        name: "description",
+        content:
+          "TanStack Start + React 19 + Tailwind CSS v4 + shadcn/ui base-mira baseline.",
       },
     ],
     links: [
@@ -34,7 +39,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="antialiased">
         {children}
         <TanStackDevtools
           config={{
