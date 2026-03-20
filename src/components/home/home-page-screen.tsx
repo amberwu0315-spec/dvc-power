@@ -14,26 +14,40 @@ export interface HomePageScreenProps {
 
 export function HomePageScreen({ data }: HomePageScreenProps) {
   return (
-    <main className="dark stack-page min-h-svh bg-background text-foreground">
-      <div className="mx-auto flex min-h-svh w-full max-w-[1560px] flex-col gap-4 px-4 py-4 sm:px-6 sm:py-5 lg:gap-5 lg:px-8 lg:py-6">
+    <main className="dark stack-page min-h-svh bg-background text-foreground xl:h-svh xl:overflow-hidden">
+      <div className="mx-auto grid min-h-svh w-full max-w-[1680px] gap-3 px-3 py-3 sm:px-4 sm:py-4 xl:h-svh xl:grid-rows-[auto_minmax(0,1fr)_minmax(220px,0.34fr)] xl:gap-3 xl:px-4 xl:py-4">
         <HomePageHeader meta={data.pageMeta} />
 
-        <section className="grid gap-4 xl:grid-cols-[minmax(280px,0.92fr)_minmax(440px,1.28fr)_minmax(300px,0.96fr)]">
-          <div className="grid gap-4">
-            <MonthlyTrendPanel data={data.monthlyTrend} />
-            <EmissionStructurePanel data={data.emissionStructure} />
+        <section className="grid min-h-0 gap-3 xl:grid-cols-[minmax(280px,0.9fr)_minmax(420px,1.18fr)_minmax(300px,0.94fr)]">
+          <div className="grid min-h-0 gap-3 xl:grid-rows-[minmax(0,1fr)_minmax(0,1fr)]">
+            <div className="min-h-0 [&>*]:h-full [&>*]:min-h-0 [&_[data-slot=card-content]]:min-h-0 [&_[data-slot=card-content]]:overflow-auto">
+              <MonthlyTrendPanel data={data.monthlyTrend} />
+            </div>
+            <div className="min-h-0 [&>*]:h-full [&>*]:min-h-0 [&_[data-slot=card-content]]:min-h-0 [&_[data-slot=card-content]]:overflow-auto">
+              <EmissionStructurePanel data={data.emissionStructure} />
+            </div>
           </div>
 
-          <KpiOverviewPanel metrics={data.kpis} />
+          <div className="min-h-0 [&>*]:h-full [&>*]:min-h-0 [&_[data-slot=card-content]]:min-h-0 [&_[data-slot=card-content]]:overflow-auto">
+            <KpiOverviewPanel metrics={data.kpis} />
+          </div>
 
-          <div className="grid gap-4">
-            <FactoryRankingPanel data={data.factoryRanking} />
-            <GoalProgressPanel data={data.goalProgress} />
-            <WarningListPanel items={data.warnings} />
+          <div className="grid min-h-0 gap-3 xl:grid-rows-[minmax(0,1.02fr)_minmax(0,0.9fr)_minmax(0,1.02fr)]">
+            <div className="min-h-0 [&>*]:h-full [&>*]:min-h-0 [&_[data-slot=card-content]]:min-h-0 [&_[data-slot=card-content]]:overflow-auto">
+              <FactoryRankingPanel data={data.factoryRanking} />
+            </div>
+            <div className="min-h-0 [&>*]:h-full [&>*]:min-h-0 [&_[data-slot=card-content]]:min-h-0 [&_[data-slot=card-content]]:overflow-auto">
+              <GoalProgressPanel data={data.goalProgress} />
+            </div>
+            <div className="min-h-0 [&>*]:h-full [&>*]:min-h-0 [&_[data-slot=card-content]]:min-h-0 [&_[data-slot=card-content]]:overflow-auto">
+              <WarningListPanel items={data.warnings} />
+            </div>
           </div>
         </section>
 
-        <FactoryTablePanel rows={data.factoryTable} />
+        <div className="min-h-0 [&>*]:h-full [&>*]:min-h-0">
+          <FactoryTablePanel rows={data.factoryTable} />
+        </div>
       </div>
     </main>
   )

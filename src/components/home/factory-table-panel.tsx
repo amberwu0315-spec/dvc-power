@@ -29,14 +29,15 @@ export function FactoryTablePanel({ rows }: FactoryTablePanelProps) {
     <DashboardSectionCard
       title={HOMEPAGE_COPY.sections.factoryTable}
       description="底部区承接工厂级关键明细，保留 6 列核心字段，优先服务首页快速对比。"
-      contentClassName="space-y-4"
+      className="min-h-0"
+      contentClassName="flex min-h-0 flex-col gap-3"
     >
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border/50 bg-background/20 px-4 py-3 text-xs text-muted-foreground">
         <span>工厂关键指标对比</span>
         <span>共 {rows.length} 个工厂对象</span>
       </div>
 
-      <div className="overflow-hidden rounded-xl border border-border/50 bg-background/16">
+      <div className="min-h-0 flex-1 overflow-auto rounded-xl border border-border/50 bg-background/16">
         <Table className="text-sm">
           <TableHeader>
             <TableRow className="border-border/60 hover:bg-transparent">
@@ -77,7 +78,7 @@ export function FactoryTablePanel({ rows }: FactoryTablePanelProps) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {rows.map((row) => {
+            {rows.slice(0, 5).map((row) => {
               const statusMeta = FACTORY_STATUS_META[row.status]
 
               return (
