@@ -12,15 +12,18 @@ export function GoalProgressPanel({ data }: GoalProgressPanelProps) {
   return (
     <DashboardSectionCard
       title={HOMEPAGE_COPY.sections.goalProgress}
-      description="右中区聚焦年度目标推进情况，优先展示目标值、当前值、完成率和差值。"
+      description="右中区聚焦年度目标推进情况，优先展示目标值、当前值与距目标差值。"
       contentClassName="space-y-4"
     >
       <div className="rounded-xl border border-border/50 bg-background/20 p-4">
         <div className="text-[0.72rem] tracking-[0.12em] text-muted-foreground uppercase">
-          完成率
+          年度完成率
         </div>
         <div className="mt-2 text-3xl font-semibold tracking-tight text-foreground">
           {data.completionRate.toFixed(1)}%
+        </div>
+        <div className="mt-1 text-sm text-muted-foreground">
+          距当前年度目标仍差 {formatNumber(data.gapValue)} tCO2e
         </div>
 
         <div className="mt-4 h-3 overflow-hidden rounded-full bg-background/40">
@@ -34,7 +37,6 @@ export function GoalProgressPanel({ data }: GoalProgressPanelProps) {
       <div className="grid gap-3 sm:grid-cols-2">
         <GoalMetricCard label="目标值" value={data.targetValue} unit="tCO2e" />
         <GoalMetricCard label="当前值" value={data.currentValue} unit="tCO2e" />
-        <GoalMetricCard label="完成率" value={data.completionRate} unit="%" />
         <GoalMetricCard label="差值" value={data.gapValue} unit="tCO2e" />
       </div>
     </DashboardSectionCard>
@@ -65,4 +67,10 @@ function GoalMetricCard({ label, value, unit }: GoalMetricCardProps) {
       </div>
     </div>
   )
+}
+
+function formatNumber(value: number) {
+  return new Intl.NumberFormat("zh-CN", {
+    maximumFractionDigits: 0,
+  }).format(value)
 }

@@ -11,23 +11,23 @@ export function KpiOverviewPanel({ metrics }: KpiOverviewPanelProps) {
   return (
     <DashboardSectionCard
       title={HOMEPAGE_COPY.sections.kpiOverview}
-      description="中间核心区聚焦 4 个核心指标，并通过同比与较上月变化辅助判断整体表现。"
-      className="min-h-[24rem]"
+      description="中间核心区优先呈现能耗、碳排、效率与绿电结构，作为首页整体判断入口。"
+      className="min-h-[28rem] border-cyan-400/12 shadow-cyan-950/20"
       contentClassName="space-y-4"
     >
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="rounded-xl border border-cyan-400/12 bg-gradient-to-r from-cyan-400/10 via-sky-400/6 to-transparent px-4 py-4">
+        <div className="text-[0.72rem] tracking-[0.14em] text-cyan-100/78 uppercase">
+          总览焦点
+        </div>
+        <p className="mt-2 text-sm/7 text-foreground/90">
+          4 个核心指标共同描述当前能碳运行状态，先看整体结果，再结合两类变化值判断趋势方向。
+        </p>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
         {metrics.map((metric) => (
           <KpiMetricCard key={metric.key} metric={metric} />
         ))}
-      </div>
-
-      <div className="grid gap-3 rounded-xl border border-border/50 bg-background/20 px-4 py-3 text-sm text-muted-foreground sm:grid-cols-3">
-        <div>
-          <span className="text-foreground/90">{metrics.length}</span> 个核心指标
-          已完成接入
-        </div>
-        <div>当前阶段优先确保数据卡片表达成立</div>
-        <div>后续可继续补趋势图标、状态色和动画反馈</div>
       </div>
     </DashboardSectionCard>
   )

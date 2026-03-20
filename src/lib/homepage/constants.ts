@@ -9,7 +9,7 @@ export const HOMEPAGE_COPY = {
   entityNameFallback: "XX制造集团 / XX产业园",
   sections: {
     kpiOverview: "核心能碳指标总览",
-    monthlyTrend: "月度能耗与碳排趋势",
+    monthlyTrend: "月度碳排趋势",
     emissionStructure: "排放来源结构分析",
     factoryRanking: "工厂能碳表现排行",
     goalProgress: "年度双碳目标达成率",

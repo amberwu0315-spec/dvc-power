@@ -17,20 +17,20 @@ const trendMeta: Record<
   up: {
     label: "上升",
     badgeClassName:
-      "border-emerald-400/30 bg-emerald-500/12 text-emerald-200 hover:bg-emerald-500/18",
-    accentClassName: "bg-emerald-300",
+      "border-cyan-400/24 bg-cyan-400/10 text-cyan-100 hover:bg-cyan-400/14",
+    accentClassName: "bg-cyan-300/80",
   },
   down: {
     label: "下降",
     badgeClassName:
-      "border-sky-400/30 bg-sky-500/12 text-sky-200 hover:bg-sky-500/18",
-    accentClassName: "bg-sky-300",
+      "border-slate-300/24 bg-slate-300/10 text-slate-100 hover:bg-slate-300/14",
+    accentClassName: "bg-slate-300/80",
   },
   flat: {
     label: "持平",
     badgeClassName:
-      "border-slate-300/20 bg-slate-300/10 text-slate-100 hover:bg-slate-300/16",
-    accentClassName: "bg-slate-300",
+      "border-indigo-300/24 bg-indigo-300/10 text-indigo-100 hover:bg-indigo-300/14",
+    accentClassName: "bg-indigo-300/80",
   },
 }
 
@@ -38,7 +38,7 @@ export function KpiMetricCard({ metric }: KpiMetricCardProps) {
   const trend = trendMeta[metric.trend]
 
   return (
-    <article className="relative overflow-hidden rounded-xl border border-border/60 bg-background/30 p-4">
+    <article className="relative min-h-[10.75rem] overflow-hidden rounded-xl border border-border/60 bg-gradient-to-b from-background/44 to-background/20 p-4">
       <div
         className={cn(
           "absolute inset-x-0 top-0 h-0.5 opacity-90",
@@ -83,22 +83,12 @@ interface MetricMetaProps {
 }
 
 function MetricMeta({ label, value }: MetricMetaProps) {
-  const isPositive = value > 0
-  const isNegative = value < 0
-
   return (
     <div className="rounded-lg border border-border/50 bg-background/20 px-3 py-2">
       <div className="text-[0.7rem] tracking-[0.12em] text-muted-foreground uppercase">
         {label}
       </div>
-      <div
-        className={cn(
-          "mt-1 text-sm font-medium",
-          isPositive && "text-emerald-200",
-          isNegative && "text-sky-200",
-          !isPositive && !isNegative && "text-foreground/90"
-        )}
-      >
+      <div className="mt-1 text-sm font-medium text-foreground/90">
         {formatSignedPercent(value)}
       </div>
     </div>

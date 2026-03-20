@@ -23,7 +23,7 @@ export function MonthlyTrendPanel({ data }: MonthlyTrendPanelProps) {
   return (
     <DashboardSectionCard
       title={HOMEPAGE_COPY.sections.monthlyTrend}
-      description="左上区展示近 12 个月能耗与碳排变化，先用简化柱形表达走势。"
+      description="左上区聚焦近 12 个月总碳排变化，用基础柱形表达波动与峰值。"
       contentClassName="space-y-4"
     >
       <div className="grid gap-3 sm:grid-cols-3">
@@ -33,7 +33,7 @@ export function MonthlyTrendPanel({ data }: MonthlyTrendPanelProps) {
           helper="当前趋势落点"
         />
         <TrendSummaryCard
-          label="本月碳排"
+          label="本月总碳排"
           value={formatNumber(latest?.carbon)}
           helper="单位：tCO2e"
         />
@@ -69,7 +69,7 @@ export function MonthlyTrendPanel({ data }: MonthlyTrendPanelProps) {
 
       <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
         <LegendDot className="bg-sky-300" label="柱高映射月度总碳排" />
-        <span>能耗数据已接入，下一步可叠加第二条折线表达综合能耗。</span>
+        <span>用于快速识别月度峰值、低谷和相邻月份变化幅度。</span>
       </div>
     </DashboardSectionCard>
   )
