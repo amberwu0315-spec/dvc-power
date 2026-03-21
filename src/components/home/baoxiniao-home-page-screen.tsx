@@ -14,6 +14,8 @@ export interface BaoxiniaoHomePageScreenProps {
 }
 
 const piePalette = ["#11a6a7", "#22bec2", "#49ccd0", "#96e1e3"]
+const sidePanelShellClassName =
+  "baoxiniao-shell-card h-full gap-0 py-0 rounded-[1.9rem]"
 
 export function BaoxiniaoHomePageScreen({
   data,
@@ -29,16 +31,16 @@ export function BaoxiniaoHomePageScreen({
 
         <section className="flex min-h-0 w-full flex-1 px-4 pb-4 pt-3 sm:px-5 sm:pb-5 sm:pt-4 xl:px-6 xl:pb-6 xl:pt-5">
           <div className="grid h-full min-h-0 w-full gap-4 sm:gap-5 xl:gap-6 lg:grid-cols-[minmax(21rem,23rem)_minmax(0,1fr)_minmax(21rem,23rem)] xl:grid-cols-[26rem_minmax(0,1fr)_26rem] 2xl:grid-cols-[27rem_minmax(0,1fr)_27rem]">
-            <aside className="min-h-0">
-              <div className="flex h-full min-h-0 flex-col gap-4 sm:gap-5 xl:gap-6">
-                <div className="min-h-0 flex-[1.26]">
+            <aside className="baoxiniao-side-band baoxiniao-side-band--left min-h-0">
+              <div className="baoxiniao-side-stack flex h-full min-h-0 flex-col gap-3 sm:gap-4 xl:gap-[1.125rem]">
+                <div className="min-h-0 flex-[1.04]">
                   <BaoxiniaoKpiOverviewPanel
                     metrics={data.overviewKpis}
-                    className="baoxiniao-rail-card baoxiniao-rail-card--hero rounded-[1.9rem]"
+                    className="baoxiniao-rail-card baoxiniao-kpi-board baoxiniao-rail-card--top rounded-[1.9rem] rounded-b-[1.15rem]"
                   />
                 </div>
 
-                <div className="min-h-0 flex-[0.92]">
+                <div className="min-h-0 flex-[1.03]">
                   <EmissionStructurePanel
                     data={data.organizationFootprintShare}
                     title="组织碳足迹范围占比"
@@ -49,9 +51,9 @@ export function BaoxiniaoHomePageScreen({
                     showTotalInHeader={false}
                     showSummaryShell={false}
                     legendStyle="plain"
-                    legendValueFormatter={(item) => `${item.percent.toFixed(2)}%`}
+                    showLegendValue={false}
                     palette={piePalette}
-                    className="baoxiniao-rail-card baoxiniao-rail-card--secondary h-full rounded-[1.7rem]"
+                    className={`${sidePanelShellClassName} rounded-t-[1.15rem]`}
                     contentClassName="px-4 pb-4 pt-3.5"
                   />
                 </div>
@@ -68,9 +70,9 @@ export function BaoxiniaoHomePageScreen({
               />
             </section>
 
-            <aside className="min-h-0">
-              <div className="flex h-full min-h-0 flex-col gap-4 sm:gap-5 xl:gap-6">
-                <div className="min-h-0 flex-[1.02]">
+            <aside className="baoxiniao-side-band baoxiniao-side-band--right min-h-0">
+              <div className="baoxiniao-side-stack flex h-full min-h-0 flex-col gap-3 sm:gap-4 xl:gap-[1.125rem]">
+                <div className="min-h-0 flex-[0.82]">
                   <FactoryRankingPanel
                     data={data.productFootprintRanking}
                     title="产品碳足迹 top 5 (kgCO₂e)"
@@ -83,12 +85,12 @@ export function BaoxiniaoHomePageScreen({
                     showSummary={false}
                     listStyle="plain"
                     showRankBadge={false}
-                    className="baoxiniao-rail-card baoxiniao-rail-card--analysis h-full rounded-[1.7rem]"
-                    contentClassName="gap-3 px-4 pb-4 pt-3.5"
+                    className={`${sidePanelShellClassName} rounded-b-[1.15rem]`}
+                    contentClassName="gap-2.5 px-4 pb-3 pt-3.5"
                   />
                 </div>
 
-                <div className="min-h-0 flex-[0.92]">
+                <div className="min-h-0 flex-[1.18]">
                   <EmissionStructurePanel
                     data={data.projectTypeShare}
                     title="减排项目类型占比"
@@ -99,9 +101,9 @@ export function BaoxiniaoHomePageScreen({
                     showTotalInHeader={false}
                     showSummaryShell={false}
                     legendStyle="plain"
-                    legendValueFormatter={(item) => `${item.percent.toFixed(2)}%`}
+                    showLegendValue={false}
                     palette={piePalette}
-                    className="baoxiniao-rail-card baoxiniao-rail-card--secondary h-full rounded-[1.7rem]"
+                    className={`${sidePanelShellClassName} rounded-t-[1.15rem]`}
                     contentClassName="px-4 pb-4 pt-3.5"
                   />
                 </div>

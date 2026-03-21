@@ -8,6 +8,7 @@ export interface DashboardSectionCardProps {
   description?: string
   children: ReactNode
   className?: string
+  cardUnstyled?: boolean
   variant?: "default" | "judgment" | "list"
   headerClassName?: string
   titleClassName?: string
@@ -21,6 +22,7 @@ export function DashboardSectionCard({
   description,
   children,
   className,
+  cardUnstyled = false,
   variant = "default",
   headerClassName,
   titleClassName,
@@ -44,8 +46,10 @@ export function DashboardSectionCard({
 
   return (
     <Card
+      unstyled={cardUnstyled}
       className={cn(
-        "stack-card border border-border/60 bg-card/88 text-card-foreground shadow-2xl shadow-black/20",
+        !cardUnstyled &&
+          "stack-card border border-border/60 bg-card/88 text-card-foreground shadow-2xl shadow-black/20",
         className
       )}
       size="sm"

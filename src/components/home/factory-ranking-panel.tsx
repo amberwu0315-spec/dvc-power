@@ -48,7 +48,7 @@ const toneClassMap = {
       "linear-gradient(90deg, #67e8f9 0%, #7dd3fc 55%, #6ee7b7 100%)",
   },
   light: {
-    card: "border-white/40 bg-white/28 shadow-[0_30px_80px_-52px_rgba(15,23,42,0.2)] backdrop-blur-2xl",
+    card: undefined,
     summary: "border-white/28 bg-white/18 text-slate-500/88",
     summaryValue: "text-slate-800",
     item: "border-white/18 bg-white/16",
@@ -106,6 +106,7 @@ export function FactoryRankingPanel({
     <DashboardSectionCard
       title={title}
       description={description}
+      cardUnstyled={tone === "light"}
       variant="list"
       headerAside={
         headerAside ?? (

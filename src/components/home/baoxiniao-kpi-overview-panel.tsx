@@ -38,44 +38,41 @@ export function BaoxiniaoKpiOverviewPanel({
         </span>
       </div>
 
-      <div className="mt-4.5 flex flex-wrap gap-x-7 gap-y-4">
-        {heroMetrics.map((metric, index) => (
+      <div className="mt-4 grid gap-3 sm:grid-cols-2 sm:gap-3.5">
+        {heroMetrics.map((metric) => (
           <article
             key={metric.id}
-            className={cn(
-              "min-w-[13rem] flex-1 space-y-2",
-              index === 1 && "sm:max-w-[15rem]"
-            )}
+            className="px-0 py-1"
           >
-            <div className="text-[0.94rem] font-medium text-slate-700/92">
+            <div className="text-[0.88rem] font-medium text-slate-700/92">
               {metric.label}
             </div>
-            <div className="flex flex-wrap items-end gap-2">
-              <div className="text-[2.45rem] leading-none font-semibold tracking-[-0.04em] text-teal-600">
+            <div className="mt-2 flex flex-wrap items-end gap-1.5">
+              <div className="text-[2.1rem] leading-none font-semibold tracking-[-0.04em] text-teal-600">
                 {metric.value}
               </div>
               {metric.unit ? (
-                <div className="pb-1 text-[0.92rem] text-slate-600/78">
+                <div className="pb-0.5 text-[0.86rem] text-slate-600/78">
                   {metric.unit}
                 </div>
               ) : null}
             </div>
             {metric.hint ? (
-              <div className="text-[0.78rem] text-slate-500/84">{metric.hint}</div>
+              <div className="mt-1 text-[0.74rem] text-slate-500/82">
+                {metric.hint}
+              </div>
             ) : null}
           </article>
         ))}
       </div>
 
-      <div className="mt-5 flex flex-wrap gap-x-7 gap-y-3.5 border-t border-white/34 pt-4">
+      <div className="mt-4.5 grid gap-x-6 gap-y-3 border-t border-white/34 pt-3.5 sm:grid-cols-2">
         {supportMetrics.map((metric, index) => (
           <article
             key={metric.id}
             className={cn(
-              "min-w-[10rem] flex-1 space-y-1.5",
-              index === 0 && "sm:max-w-[12rem]",
-              index === 1 && "sm:max-w-[13rem]",
-              index > 1 && "sm:max-w-[11rem]"
+              "min-w-0 space-y-1.5",
+              index > 1 && "sm:pt-1"
             )}
           >
             <div className="text-[0.82rem] font-medium text-slate-500/88">
@@ -99,7 +96,7 @@ export function BaoxiniaoKpiOverviewPanel({
       </div>
 
       {statusMetric ? (
-        <article className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-white/26 pt-4">
+        <article className="mt-4.5 flex flex-wrap items-center justify-between gap-4 border-t border-white/26 pt-3.5">
           <div className="space-y-1.5">
             <div className="text-[0.84rem] font-medium text-slate-500/88">
               {statusMetric.label}

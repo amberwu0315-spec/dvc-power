@@ -22,6 +22,7 @@ export interface EmissionStructurePanelProps {
   centerLabel?: string
   showSummaryShell?: boolean
   legendStyle?: "card" | "plain"
+  showLegendValue?: boolean
 }
 
 const defaultPalette = [
@@ -45,7 +46,7 @@ const toneClassMap = {
     pieInner: "bg-[rgba(8,15,27,0.75)]",
   },
   light: {
-    card: "border-white/40 bg-white/30 shadow-[0_30px_80px_-52px_rgba(15,23,42,0.2)] backdrop-blur-2xl",
+    card: undefined,
     headerBadge:
       "border-white/42 bg-white/24 text-slate-600 shadow-[0_14px_28px_-24px_rgba(15,23,42,0.24)]",
     shell: "border-white/24 bg-white/14",
@@ -74,17 +75,20 @@ export function EmissionStructurePanel({
   centerLabel,
   showSummaryShell = true,
   legendStyle = "card",
+  showLegendValue = true,
 }: EmissionStructurePanelProps) {
   const total = data.reduce((sum, item) => sum + item.value, 0)
   const toneClasses = toneClassMap[tone]
   const resolvedLegendValueFormatter =
     legendValueFormatter ?? defaultLegendValueFormatter
   const pieGradient = buildPieGradient(data, palette)
+  const pieCallouts = buildPieCallouts(data, palette)
 
   return (
     <DashboardSectionCard
       title={title}
       description={description}
+      cardUnstyled={tone === "light"}
       headerAside={
         headerAside ??
         (showTotalInHeader ? (
@@ -131,14 +135,46 @@ export function EmissionStructurePanel({
         {chartType === "pie" ? (
           <div
             className={cn(
-              "grid gap-3 lg:grid-cols-[minmax(150px,190px)_minmax(0,1fr)] lg:items-center",
+              "flex flex-col gap-4",
               showSummaryShell && "mt-3"
             )}
           >
-            <div className="mx-auto">
+            <div className="relative mx-auto h-[15.5rem] w-full max-w-[20rem] overflow-visible pt-2">
+              <svg
+                viewBox="0 0 320 240"
+                className="pointer-events-none absolute inset-0 z-10 h-full w-full overflow-visible"
+                aria-hidden="true"
+              >
+                {pieCallouts.map((callout) => (
+                  <g key={`${callout.item.category}-callout-line`}>
+                    <path
+                      d={`M ${callout.anchorX} ${callout.anchorY} L ${callout.bendX} ${callout.bendY} L ${callout.labelLineX} ${callout.bendY}`}
+                      fill="none"
+                      stroke={callout.color}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeOpacity="0.82"
+                      strokeWidth="2.1"
+                    />
+
+                    <text
+                      x={callout.labelTextX}
+                      y={callout.bendY + 4}
+                      fill={callout.color}
+                      fontSize="15"
+                      fontWeight="600"
+                      letterSpacing="-0.02em"
+                      textAnchor={callout.side === "right" ? "start" : "end"}
+                    >
+                      {formatPercent(callout.item.percent)}
+                    </text>
+                  </g>
+                ))}
+              </svg>
+
               <div
                 className={cn(
-                  "relative aspect-square w-[clamp(9.5rem,20vw,12.5rem)] rounded-full border border-white/70 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.6),0_24px_40px_-32px_rgba(15,23,42,0.34)]",
+                  "absolute left-1/2 top-[7.35rem] z-0 aspect-square w-[clamp(10.5rem,20vw,12.75rem)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/70 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.6),0_24px_40px_-32px_rgba(15,23,42,0.34)]",
                   legendStyle === "plain" &&
                     "shadow-[inset_0_0_0_1px_rgba(255,255,255,0.75),0_28px_48px_-34px_rgba(15,23,42,0.26)]"
                 )}
@@ -161,11 +197,12 @@ export function EmissionStructurePanel({
                       {centerLabel}
                     </span>
                   </div>
-                ) : null}
+                  ) : null}
               </div>
+
             </div>
 
-            <div className="space-y-2">
+            <div className="grid gap-x-5 gap-y-2.5 pt-2 sm:grid-cols-2">
               {data.map((item, index) => (
                 <StructureLegendItem
                   key={item.category}
@@ -174,6 +211,7 @@ export function EmissionStructurePanel({
                   tone={tone}
                   valueFormatter={resolvedLegendValueFormatter}
                   legendStyle={legendStyle}
+                  showValue={showLegendValue}
                 />
               ))}
             </div>
@@ -267,18 +305,22 @@ function StructureLegendItem({
   tone,
   valueFormatter,
   legendStyle,
+  showValue,
 }: {
   item: EmissionStructureItem
   color: string
   tone: "dark" | "light"
   valueFormatter: (item: EmissionStructureItem) => string
   legendStyle: "card" | "plain"
+  showValue: boolean
 }) {
   return (
     <div
       className={cn(
         legendStyle === "plain"
-          ? "grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-0 py-0"
+          ? showValue
+            ? "grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-0 py-0"
+            : "grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 px-0 py-0"
           : "grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-lg border px-3 py-2",
         legendStyle === "card" && toneClassMap[tone].legendItem
       )}
@@ -297,9 +339,11 @@ function StructureLegendItem({
       >
         {item.category}
       </span>
-      <span className={cn("text-sm font-medium", toneClassMap[tone].valueText)}>
-        {valueFormatter(item)}
-      </span>
+      {showValue ? (
+        <span className={cn("text-sm font-medium", toneClassMap[tone].valueText)}>
+          {valueFormatter(item)}
+        </span>
+      ) : null}
     </div>
   )
 }
@@ -318,4 +362,121 @@ function buildPieGradient(data: EmissionStructureItem[], palette: string[]) {
   })
 
   return `conic-gradient(${segments.join(", ")})`
+}
+
+function buildPieCallouts(
+  data: EmissionStructureItem[],
+  palette: string[]
+): Array<{
+  item: EmissionStructureItem
+  color: string
+  side: "left" | "right"
+  anchorX: number
+  anchorY: number
+  bendX: number
+  bendY: number
+  labelLineX: number
+  labelTextX: number
+  targetY: number
+}> {
+  const centerX = 160
+  const centerY = 112
+  const anchorRadius = 82
+  const bendRadius = 102
+  const lineOuterX = {
+    left: 62,
+    right: 258,
+  } as const
+  const textX = {
+    left: 54,
+    right: 266,
+  } as const
+  const topBound = 34
+  const bottomBound = 198
+  const minGap = 30
+
+  let cumulative = 0
+
+  const callouts: Array<{
+    item: EmissionStructureItem
+    color: string
+    side: "left" | "right"
+    anchorX: number
+    anchorY: number
+    bendX: number
+    bendY: number
+    labelLineX: number
+    labelTextX: number
+    targetY: number
+  }> = data.map((item, index) => {
+    const color = palette[index % palette.length]
+    const midPercent = cumulative + item.percent / 2
+    cumulative += item.percent
+
+    const angle = (midPercent / 100) * Math.PI * 2 - Math.PI / 2
+    const side: "left" | "right" =
+      Math.cos(angle) >= 0 ? "right" : "left"
+    const anchorX = centerX + Math.cos(angle) * anchorRadius
+    const anchorY = centerY + Math.sin(angle) * anchorRadius
+    const bendX = centerX + Math.cos(angle) * bendRadius
+    const bendY = centerY + Math.sin(angle) * bendRadius
+
+    return {
+      item,
+      color,
+      side,
+      anchorX,
+      anchorY,
+      bendX,
+      bendY,
+      labelLineX: side === "right" ? lineOuterX.right : lineOuterX.left,
+      labelTextX: side === "right" ? textX.right : textX.left,
+      targetY: bendY,
+    }
+  })
+
+  for (const side of ["left", "right"] as const) {
+    const sideItems = callouts
+      .filter((callout) => callout.side === side)
+      .sort((a, b) => a.targetY - b.targetY)
+
+    for (let index = 1; index < sideItems.length; index += 1) {
+      sideItems[index].targetY = Math.max(
+        sideItems[index].targetY,
+        sideItems[index - 1].targetY + minGap
+      )
+    }
+
+    for (let index = sideItems.length - 2; index >= 0; index -= 1) {
+      sideItems[index].targetY = Math.min(
+        sideItems[index].targetY,
+        sideItems[index + 1].targetY - minGap
+      )
+    }
+
+    const overflowTop = topBound - (sideItems[0]?.targetY ?? topBound)
+    if (overflowTop > 0) {
+      sideItems.forEach((item) => {
+        item.targetY += overflowTop
+      })
+    }
+
+    const overflowBottom =
+      (sideItems[sideItems.length - 1]?.targetY ?? bottomBound) - bottomBound
+    if (overflowBottom > 0) {
+      sideItems.forEach((item) => {
+        item.targetY -= overflowBottom
+      })
+    }
+  }
+
+  callouts.forEach((callout) => {
+    callout.bendY = callout.targetY
+  })
+
+  return callouts
+}
+
+function formatPercent(value: number) {
+  return `${value.toFixed(2)}%`
 }
