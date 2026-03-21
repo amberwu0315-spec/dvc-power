@@ -13,6 +13,7 @@
 - `agent-01-需求理解-agent.md`
 - `agent-02-页面编排-agent.md`
 - `agent-03-demo方案输出-agent.md`
+- `agent-04-页面的精修与验收.md`
 
 ### 2.2 Skill 文档
 
