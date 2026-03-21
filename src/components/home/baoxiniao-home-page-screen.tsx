@@ -15,7 +15,7 @@ export interface BaoxiniaoHomePageScreenProps {
 
 const piePalette = ["#11a6a7", "#22bec2", "#49ccd0", "#96e1e3"]
 const sidePanelShellClassName =
-  "baoxiniao-shell-card h-full gap-0 py-0 rounded-[1.9rem]"
+  "baoxiniao-shell-card h-full gap-0 py-0 rounded-[18px]"
 
 export function BaoxiniaoHomePageScreen({
   data,
@@ -33,28 +33,28 @@ export function BaoxiniaoHomePageScreen({
           <div className="grid h-full min-h-0 w-full gap-4 sm:gap-5 xl:gap-6 lg:grid-cols-[minmax(21rem,23rem)_minmax(0,1fr)_minmax(21rem,23rem)] xl:grid-cols-[26rem_minmax(0,1fr)_26rem] 2xl:grid-cols-[27rem_minmax(0,1fr)_27rem]">
             <aside className="baoxiniao-side-band baoxiniao-side-band--left min-h-0">
               <div className="baoxiniao-side-stack flex h-full min-h-0 flex-col gap-3 sm:gap-4 xl:gap-[1.125rem]">
-                <div className="min-h-0 flex-[1.04]">
+                <div className="min-h-0 flex-[0.96]">
                   <BaoxiniaoKpiOverviewPanel
                     metrics={data.overviewKpis}
-                    className="baoxiniao-rail-card baoxiniao-kpi-board baoxiniao-rail-card--top rounded-[1.9rem] rounded-b-[1.15rem]"
+                    className="baoxiniao-rail-card baoxiniao-kpi-board rounded-[18px]"
                   />
                 </div>
 
-                <div className="min-h-0 flex-[1.03]">
+                <div className="min-h-0 flex-[1.11]">
                   <EmissionStructurePanel
-                    data={data.organizationFootprintShare}
-                    title="组织碳足迹范围占比"
+                    data={data.projectTypeShare}
+                    title="减排项目类型占比"
                     description=""
                     chartType="pie"
                     tone="light"
-                    headerAside={<PanelArrowIcon />}
+                    headerAside={<span className="inline-flex size-7 opacity-0" aria-hidden="true" />}
                     showTotalInHeader={false}
                     showSummaryShell={false}
                     legendStyle="plain"
                     showLegendValue={false}
                     palette={piePalette}
-                    className={`${sidePanelShellClassName} rounded-t-[1.15rem]`}
-                    contentClassName="px-4 pb-4 pt-3.5"
+                    className={sidePanelShellClassName}
+                    contentClassName="px-5 pb-4 pt-3.5"
                   />
                 </div>
               </div>
@@ -85,15 +85,15 @@ export function BaoxiniaoHomePageScreen({
                     showSummary={false}
                     listStyle="plain"
                     showRankBadge={false}
-                    className={`${sidePanelShellClassName} rounded-b-[1.15rem]`}
-                    contentClassName="gap-2.5 px-4 pb-3 pt-3.5"
+                    className={sidePanelShellClassName}
+                    contentClassName="gap-2.5 px-5 pb-3 pt-3.5"
                   />
                 </div>
 
                 <div className="min-h-0 flex-[1.18]">
                   <EmissionStructurePanel
-                    data={data.projectTypeShare}
-                    title="减排项目类型占比"
+                    data={data.organizationFootprintShare}
+                    title="组织碳足迹范围占比"
                     description=""
                     chartType="pie"
                     tone="light"
@@ -103,8 +103,8 @@ export function BaoxiniaoHomePageScreen({
                     legendStyle="plain"
                     showLegendValue={false}
                     palette={piePalette}
-                    className={`${sidePanelShellClassName} rounded-t-[1.15rem]`}
-                    contentClassName="px-4 pb-4 pt-3.5"
+                    className={sidePanelShellClassName}
+                    contentClassName="px-5 pb-4 pt-3.5"
                   />
                 </div>
               </div>
@@ -186,71 +186,12 @@ function TopBarChip({
 
 function SaintAngeloLogo() {
   return (
-    <svg
+    <img
       aria-label="报喜鸟 Saint Angelo"
-      role="img"
-      viewBox="0 0 290 112"
-      className="h-12 w-auto shrink-0 sm:h-14"
-    >
-      <g fill="none" strokeLinecap="round" strokeLinejoin="round">
-        <path
-          d="M92 13c17 11 29 23 40 39"
-          stroke="#0f2e63"
-          strokeWidth="4"
-        />
-        <path
-          d="M121 7c7 6 12 13 15 21"
-          stroke="#db4b43"
-          strokeWidth="6"
-        />
-        <path
-          d="M120 53c16 16 39 25 64 25 25 0 47-8 68-24"
-          stroke="#0f2e63"
-          strokeWidth="5"
-        />
-        <path
-          d="M188 24c19-1 34 2 48 10"
-          stroke="#0f2e63"
-          strokeWidth="4"
-        />
-        <path
-          d="M179 37c21-1 41 4 57 14"
-          stroke="#0f2e63"
-          strokeWidth="4"
-        />
-        <path
-          d="M174 52c24 0 43 5 58 15"
-          stroke="#0f2e63"
-          strokeWidth="4"
-        />
-        <path
-          d="M153 29c-10 8-13 18-12 32 1 15 7 26 18 35"
-          stroke="#0f2e63"
-          strokeWidth="4"
-        />
-      </g>
-      <text
-        x="0"
-        y="62"
-        fill="#0f2e63"
-        fontFamily="'Noto Serif SC','Songti SC','STSong',serif"
-        fontSize="34"
-        letterSpacing="2"
-      >
-        报喜鸟
-      </text>
-      <path d="M0 74h124" stroke="#0f2e63" strokeWidth="1.5" />
-      <text
-        x="0"
-        y="104"
-        fill="#0f2e63"
-        fontFamily="Georgia,'Times New Roman',serif"
-        fontSize="28"
-        letterSpacing="2"
-      >
-        SAINT ANGELO
-      </text>
-    </svg>
+      src="/报喜鸟logo.png"
+      alt="报喜鸟 Saint Angelo"
+      className="h-14 w-auto shrink-0 object-contain sm:h-16"
+    />
   )
 }
 

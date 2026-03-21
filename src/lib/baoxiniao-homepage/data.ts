@@ -42,7 +42,6 @@ export const baoxiniaoHomepageData: BaoxiniaoHomepageData = {
       label: "碳排强度",
       value: "34.80",
       unit: "tCO2e/万件",
-      hint: "组织碳排 / 产品件数",
       emphasis: "metric",
     },
     {
@@ -50,7 +49,6 @@ export const baoxiniaoHomepageData: BaoxiniaoHomepageData = {
       label: "目标碳排强度",
       value: "50.00",
       unit: "tCO2e/万件",
-      hint: "年度强度目标",
       emphasis: "metric",
     },
     {

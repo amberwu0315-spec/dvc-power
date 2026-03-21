@@ -20,7 +20,7 @@ export function BaoxiniaoKpiOverviewPanel({
   return (
     <section
       className={cn(
-        "baoxiniao-float-card baoxiniao-kpi-board flex h-full flex-col rounded-[1.95rem] px-4 py-4 sm:px-5 sm:py-5",
+        "baoxiniao-float-card baoxiniao-kpi-board flex h-full flex-col rounded-[18px] px-4 py-4 sm:px-5 sm:py-5",
         className
       )}
     >
@@ -33,9 +33,6 @@ export function BaoxiniaoKpiOverviewPanel({
             组织级综合数据
           </h2>
         </div>
-        <span className="inline-flex items-center rounded-full border border-white/34 bg-white/18 px-3 py-1 text-[0.72rem] tracking-[0.16em] text-slate-600/86 uppercase backdrop-blur-md">
-          企业总览
-        </span>
       </div>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2 sm:gap-3.5">

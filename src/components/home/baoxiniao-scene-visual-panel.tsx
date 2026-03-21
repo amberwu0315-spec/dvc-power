@@ -15,7 +15,7 @@ export interface BaoxiniaoSceneVisualPanelProps {
 }
 
 export function BaoxiniaoSceneVisualPanel({
-  markers,
+  markers: _markers,
   title,
   subtitle,
   statusItems,
@@ -25,7 +25,7 @@ export function BaoxiniaoSceneVisualPanel({
     <section
       aria-label="报喜鸟静态园区主视觉"
       className={cn(
-        "baoxiniao-scene absolute inset-0 overflow-hidden rounded-[2rem] xl:rounded-[2.5rem]",
+        "baoxiniao-scene absolute inset-0 overflow-hidden rounded-[18px]",
         className
       )}
     >
@@ -50,30 +50,6 @@ export function BaoxiniaoSceneVisualPanel({
           Smart Factory Carbon View
         </div>
       </div>
-
-      {markers.map((marker, index) => {
-        const markerLeft = Number.parseFloat(marker.left)
-        const isRightSide = !Number.isNaN(markerLeft) && markerLeft >= 50
-
-        return (
-          <div
-            key={`${marker.label}-${index}`}
-            className={cn(
-              "baoxiniao-scene-marker absolute z-10 hidden xl:flex",
-              isRightSide
-                ? "baoxiniao-scene-marker--right"
-                : "baoxiniao-scene-marker--left"
-            )}
-            style={{ top: marker.top, left: marker.left }}
-          >
-            <span className="baoxiniao-scene-marker-core">
-              <span className="baoxiniao-scene-marker-dot" />
-            </span>
-            <span className="baoxiniao-scene-marker-line" />
-            <span className="baoxiniao-scene-marker-label">{marker.label}</span>
-          </div>
-        )
-      })}
 
       <div className="absolute inset-x-5 bottom-5 z-10 xl:inset-x-7 xl:bottom-6">
         <div className="baoxiniao-scene-status">

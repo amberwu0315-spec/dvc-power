@@ -282,7 +282,7 @@
   .baoxiniao-visual-stage {
     position: relative;
     overflow: hidden;
-    border-radius: 2.2rem;
+    border-radius: 18px;
     background: transparent;
     box-shadow: 0 16px 40px -42px rgba(44, 66, 89, 0.18);
   }
@@ -632,16 +632,6 @@
         rgba(255, 255, 255, 0.1) 52%,
         rgba(255, 255, 255, 0.04) 100%
       );
-  }
-
-  .baoxiniao-rail-card--top {
-    border-bottom-left-radius: 1.15rem !important;
-    border-bottom-right-radius: 1.15rem !important;
-  }
-
-  .baoxiniao-rail-card--bottom {
-    border-top-left-radius: 1.15rem !important;
-    border-top-right-radius: 1.15rem !important;
   }
 
   .baoxiniao-side-band {
