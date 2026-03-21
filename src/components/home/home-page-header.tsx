@@ -1,8 +1,8 @@
 import type { ReactNode } from "react"
 
 import { Card, CardContent } from "@/components/ui/card"
-import { HOMEPAGE_COPY } from "@/lib/homepage/constants"
-import type { HomepagePageMeta } from "@/lib/homepage/types"
+import { HOMEPAGE_COPY } from "@/features/templates/manufacturing-carbon-overview/constants"
+import type { HomepagePageMeta } from "@/features/templates/manufacturing-carbon-overview/types"
 import { cn } from "@/lib/utils"
 
 export interface HomePageHeaderProps {

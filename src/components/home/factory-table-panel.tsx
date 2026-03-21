@@ -8,8 +8,11 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { DashboardSectionCard } from "@/components/home/dashboard-section-card"
-import { FACTORY_STATUS_META, HOMEPAGE_COPY } from "@/lib/homepage/constants"
-import type { FactoryTableRow } from "@/lib/homepage/types"
+import {
+  FACTORY_STATUS_META,
+  HOMEPAGE_COPY,
+} from "@/features/templates/manufacturing-carbon-overview/constants"
+import type { FactoryTableRow } from "@/features/templates/manufacturing-carbon-overview/types"
 import { cn } from "@/lib/utils"
 
 export interface FactoryTablePanelProps {

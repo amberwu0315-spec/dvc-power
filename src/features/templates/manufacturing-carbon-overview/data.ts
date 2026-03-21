@@ -1,7 +1,11 @@
-import { HOMEPAGE_COPY, KPI_LABELS, KPI_UNITS } from "@/lib/homepage/constants"
-import type { HomepageDashboardData } from "@/lib/homepage/types"
+import {
+  HOMEPAGE_COPY,
+  KPI_LABELS,
+  KPI_UNITS,
+} from "@/features/templates/manufacturing-carbon-overview/constants"
+import type { HomepageDashboardData } from "@/features/templates/manufacturing-carbon-overview/types"
 
-export const homepageDashboardData: HomepageDashboardData = {
+export const manufacturingCarbonOverviewData: HomepageDashboardData = {
   pageMeta: {
     pageTitle: HOMEPAGE_COPY.pageTitle,
     entityName: "华东智造产业园",

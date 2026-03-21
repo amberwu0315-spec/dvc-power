@@ -1,8 +1,8 @@
 import type { ReactNode } from "react"
 
 import { DashboardSectionCard } from "@/components/home/dashboard-section-card"
-import { HOMEPAGE_COPY } from "@/lib/homepage/constants"
-import type { EmissionStructureItem } from "@/lib/homepage/types"
+import { HOMEPAGE_COPY } from "@/features/templates/manufacturing-carbon-overview/constants"
+import type { EmissionStructureItem } from "@/features/templates/manufacturing-carbon-overview/types"
 import { cn } from "@/lib/utils"
 
 export interface EmissionStructurePanelProps {
@@ -134,10 +134,7 @@ export function EmissionStructurePanel({
 
         {chartType === "pie" ? (
           <div
-            className={cn(
-              "flex flex-col gap-4",
-              showSummaryShell && "mt-3"
-            )}
+            className={cn("flex flex-col gap-4", showSummaryShell && "mt-3")}
           >
             <div className="relative mx-auto h-[15.5rem] w-full max-w-[20rem] overflow-visible pt-2">
               <svg
@@ -174,7 +171,7 @@ export function EmissionStructurePanel({
 
               <div
                 className={cn(
-                  "absolute left-1/2 top-[7.35rem] z-0 aspect-square w-[clamp(10.5rem,20vw,12.75rem)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/70 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.6),0_24px_40px_-32px_rgba(15,23,42,0.34)]",
+                  "absolute top-[7.35rem] left-1/2 z-0 aspect-square w-[clamp(10.5rem,20vw,12.75rem)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/70 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.6),0_24px_40px_-32px_rgba(15,23,42,0.34)]",
                   legendStyle === "plain" &&
                     "shadow-[inset_0_0_0_1px_rgba(255,255,255,0.75),0_28px_48px_-34px_rgba(15,23,42,0.26)]"
                 )}
@@ -197,9 +194,8 @@ export function EmissionStructurePanel({
                       {centerLabel}
                     </span>
                   </div>
-                  ) : null}
+                ) : null}
               </div>
-
             </div>
 
             <div className="grid gap-x-5 gap-y-2.5 pt-2 sm:grid-cols-2">
@@ -327,7 +323,9 @@ function StructureLegendItem({
     >
       <span
         className={cn(
-          legendStyle === "plain" ? "size-3.5 rounded-full" : "size-3 rounded-sm"
+          legendStyle === "plain"
+            ? "size-3.5 rounded-full"
+            : "size-3 rounded-sm"
         )}
         style={{ backgroundColor: color }}
       />
@@ -340,7 +338,9 @@ function StructureLegendItem({
         {item.category}
       </span>
       {showValue ? (
-        <span className={cn("text-sm font-medium", toneClassMap[tone].valueText)}>
+        <span
+          className={cn("text-sm font-medium", toneClassMap[tone].valueText)}
+        >
           {valueFormatter(item)}
         </span>
       ) : null}
@@ -414,8 +414,7 @@ function buildPieCallouts(
     cumulative += item.percent
 
     const angle = (midPercent / 100) * Math.PI * 2 - Math.PI / 2
-    const side: "left" | "right" =
-      Math.cos(angle) >= 0 ? "right" : "left"
+    const side: "left" | "right" = Math.cos(angle) >= 0 ? "right" : "left"
     const anchorX = centerX + Math.cos(angle) * anchorRadius
     const anchorY = centerY + Math.sin(angle) * anchorRadius
     const bendX = centerX + Math.cos(angle) * bendRadius

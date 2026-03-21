@@ -1,24 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router"
 
-import { HomePageScreen } from "@/components/home/home-page-screen"
-import { homepageDashboardData } from "@/lib/homepage/data"
+import { DashboardAssetLibraryPage } from "@/components/navigation/dashboard-asset-library-page"
 
 export const Route = createFileRoute("/")({
-  component: HomePage,
+  component: DashboardAssetLibraryHomePage,
   head: () => ({
     meta: [
       {
-        title: "制造业能碳总览首页 | DVS Power",
+        title: "驾驶舱资产目录 | DVS Power",
       },
       {
         name: "description",
         content:
-          "制造业能碳总览首页 demo 骨架，包含顶部信息、核心指标、分析区、管理区和底部明细区。",
+          "统一查看通用模板和具体案例的入口页，明确模板复用与案例派生的组织方式。",
       },
     ],
   }),
 })
 
-export function HomePage() {
-  return <HomePageScreen data={homepageDashboardData} />
+export function DashboardAssetLibraryHomePage() {
+  return <DashboardAssetLibraryPage />
 }

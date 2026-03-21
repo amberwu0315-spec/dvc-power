@@ -1,8 +1,11 @@
 import type { ReactNode } from "react"
 
 import { DashboardSectionCard } from "@/components/home/dashboard-section-card"
-import { FACTORY_RANKING_META, HOMEPAGE_COPY } from "@/lib/homepage/constants"
-import type { FactoryRankingItem } from "@/lib/homepage/types"
+import {
+  FACTORY_RANKING_META,
+  HOMEPAGE_COPY,
+} from "@/features/templates/manufacturing-carbon-overview/constants"
+import type { FactoryRankingItem } from "@/features/templates/manufacturing-carbon-overview/types"
 import { cn } from "@/lib/utils"
 
 export interface RankingListItem {
@@ -56,7 +59,8 @@ const toneClassMap = {
     itemLabel: "text-slate-800",
     itemValue: "text-slate-500/88",
     collapsed: "border-dashed border-white/24 bg-white/18 text-slate-500/88",
-    defaultBarGradient: "linear-gradient(90deg, #14b8a6 0%, #2dd4bf 52%, #7dd3fc 100%)",
+    defaultBarGradient:
+      "linear-gradient(90deg, #14b8a6 0%, #2dd4bf 52%, #7dd3fc 100%)",
   },
 } as const
 

@@ -1,6 +1,6 @@
 import { DashboardSectionCard } from "@/components/home/dashboard-section-card"
-import { HOMEPAGE_COPY } from "@/lib/homepage/constants"
-import type { GoalProgress } from "@/lib/homepage/types"
+import { HOMEPAGE_COPY } from "@/features/templates/manufacturing-carbon-overview/constants"
+import type { GoalProgress } from "@/features/templates/manufacturing-carbon-overview/types"
 
 export interface GoalProgressPanelProps {
   data: GoalProgress

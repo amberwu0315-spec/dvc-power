@@ -6,13 +6,15 @@ import { GoalProgressPanel } from "@/components/home/goal-progress-panel"
 import { KpiOverviewPanel } from "@/components/home/kpi-overview-panel"
 import { MonthlyTrendPanel } from "@/components/home/monthly-trend-panel"
 import { WarningListPanel } from "@/components/home/warning-list-panel"
-import type { HomepageDashboardData } from "@/lib/homepage/types"
+import type { HomepageDashboardData } from "@/features/templates/manufacturing-carbon-overview/types"
 
-export interface HomePageScreenProps {
+export interface ManufacturingCarbonOverviewScreenProps {
   data: HomepageDashboardData
 }
 
-export function HomePageScreen({ data }: HomePageScreenProps) {
+export function ManufacturingCarbonOverviewScreen({
+  data,
+}: ManufacturingCarbonOverviewScreenProps) {
   return (
     <main className="dark stack-page min-h-svh bg-background text-foreground xl:h-svh">
       <div className="grid min-h-svh w-full max-w-none gap-3 px-3 py-3 sm:px-4 sm:py-4 xl:h-svh xl:grid-rows-[auto_minmax(0,1fr)_minmax(206px,0.3fr)] xl:gap-2.5 xl:px-2 xl:py-4">

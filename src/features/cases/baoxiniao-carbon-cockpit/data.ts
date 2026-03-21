@@ -1,6 +1,6 @@
-import type { BaoxiniaoHomepageData } from "@/lib/baoxiniao-homepage/types"
+import type { BaoxiniaoHomepageData } from "@/features/cases/baoxiniao-carbon-cockpit/types"
 
-export const baoxiniaoHomepageData: BaoxiniaoHomepageData = {
+export const baoxiniaoCarbonCockpitData: BaoxiniaoHomepageData = {
   pageMeta: {
     pageTitle: "报喜鸟全景碳驾驶舱",
     brandName: "SAINT ANGELO",

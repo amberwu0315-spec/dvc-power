@@ -1,34 +1,34 @@
 import { render, screen } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
 
-import { baoxiniaoHomepageData } from "@/lib/baoxiniao-homepage/data"
-import { BaoxiniaoHomePage } from "@/routes/baoxiniao"
+import { baoxiniaoCarbonCockpitData } from "@/features/cases/baoxiniao-carbon-cockpit/data"
+import { BaoxiniaoCarbonCockpitCasePage } from "@/routes/cases/baoxiniao-carbon-cockpit"
 
-describe("BaoxiniaoHomePage", () => {
+describe("BaoxiniaoCarbonCockpitCasePage", () => {
   it("renders the baoxiniao dashboard headline and filters", () => {
-    render(<BaoxiniaoHomePage />)
+    render(<BaoxiniaoCarbonCockpitCasePage />)
 
     expect(
       screen.getByRole("heading", {
         level: 1,
-        name: baoxiniaoHomepageData.pageMeta.pageTitle,
+        name: baoxiniaoCarbonCockpitData.pageMeta.pageTitle,
       })
     ).toBeDefined()
     expect(
-      screen.getAllByText(baoxiniaoHomepageData.pageMeta.organizationName)
+      screen.getAllByText(baoxiniaoCarbonCockpitData.pageMeta.organizationName)
         .length
     ).toBeGreaterThan(0)
     expect(
-      screen.getByText(baoxiniaoHomepageData.pageMeta.yearLabel)
+      screen.getByText(baoxiniaoCarbonCockpitData.pageMeta.yearLabel)
     ).toBeDefined()
     expect(
-      screen.getByText(baoxiniaoHomepageData.pageMeta.weatherLabel)
+      screen.getByText(baoxiniaoCarbonCockpitData.pageMeta.weatherLabel)
     ).toBeDefined()
     expect(screen.getByLabelText("报喜鸟 Saint Angelo")).toBeDefined()
   })
 
   it("renders the baoxiniao visual homepage modules", () => {
-    render(<BaoxiniaoHomePage />)
+    render(<BaoxiniaoCarbonCockpitCasePage />)
 
     expect(screen.getByText("组织级综合数据")).toBeDefined()
     expect(screen.getByText("产品碳足迹 top 5 (kgCO₂e)")).toBeDefined()

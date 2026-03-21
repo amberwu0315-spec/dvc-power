@@ -1,4 +1,4 @@
-import type { BaoxiniaoSceneMarker } from "@/lib/baoxiniao-homepage/types"
+import type { BaoxiniaoSceneMarker } from "@/features/cases/baoxiniao-carbon-cockpit/types"
 import { cn } from "@/lib/utils"
 
 export interface BaoxiniaoSceneStatusItem {
@@ -55,12 +55,8 @@ export function BaoxiniaoSceneVisualPanel({
         <div className="baoxiniao-scene-status">
           {statusItems.map((item) => (
             <div key={item.label} className="baoxiniao-scene-status-item">
-              <div className="baoxiniao-scene-status-label">
-                {item.label}
-              </div>
-              <div className="baoxiniao-scene-status-value">
-                {item.value}
-              </div>
+              <div className="baoxiniao-scene-status-label">{item.label}</div>
+              <div className="baoxiniao-scene-status-value">{item.value}</div>
             </div>
           ))}
         </div>

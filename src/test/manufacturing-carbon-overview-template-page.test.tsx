@@ -1,32 +1,42 @@
 import { render, screen } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
 
-import { homepageDashboardData } from "@/lib/homepage/data"
-import { HOMEPAGE_COPY } from "@/lib/homepage/constants"
-import { HomePage } from "@/routes/index"
+import { HOMEPAGE_COPY } from "@/features/templates/manufacturing-carbon-overview/constants"
+import { manufacturingCarbonOverviewData } from "@/features/templates/manufacturing-carbon-overview/data"
+import { ManufacturingCarbonOverviewTemplatePage } from "@/routes/templates/manufacturing-carbon-overview"
 
-describe("HomePage", () => {
+describe("ManufacturingCarbonOverviewTemplatePage", () => {
   it("renders the manufacturing dashboard shell", () => {
-    render(<HomePage />)
+    render(<ManufacturingCarbonOverviewTemplatePage />)
 
     expect(
       screen.getByRole("heading", {
         level: 1,
-        name: homepageDashboardData.pageMeta.pageTitle,
+        name: manufacturingCarbonOverviewData.pageMeta.pageTitle,
       })
     ).toBeDefined()
-    expect(screen.getByText(homepageDashboardData.pageMeta.entityName)).toBeDefined()
-    expect(screen.getByText(homepageDashboardData.pageMeta.periodLabel)).toBeDefined()
-    expect(screen.getByText(homepageDashboardData.pageMeta.updatedAt)).toBeDefined()
+    expect(
+      screen.getByText(manufacturingCarbonOverviewData.pageMeta.entityName)
+    ).toBeDefined()
+    expect(
+      screen.getByText(manufacturingCarbonOverviewData.pageMeta.periodLabel)
+    ).toBeDefined()
+    expect(
+      screen.getByText(manufacturingCarbonOverviewData.pageMeta.updatedAt)
+    ).toBeDefined()
   })
 
   it("renders the homepage skeleton sections", () => {
-    render(<HomePage />)
+    render(<ManufacturingCarbonOverviewTemplatePage />)
 
     expect(screen.getByText(HOMEPAGE_COPY.sections.kpiOverview)).toBeDefined()
     expect(screen.getByText(HOMEPAGE_COPY.sections.monthlyTrend)).toBeDefined()
-    expect(screen.getByText(HOMEPAGE_COPY.sections.emissionStructure)).toBeDefined()
-    expect(screen.getByText(HOMEPAGE_COPY.sections.factoryRanking)).toBeDefined()
+    expect(
+      screen.getByText(HOMEPAGE_COPY.sections.emissionStructure)
+    ).toBeDefined()
+    expect(
+      screen.getByText(HOMEPAGE_COPY.sections.factoryRanking)
+    ).toBeDefined()
     expect(screen.getByText(HOMEPAGE_COPY.sections.goalProgress)).toBeDefined()
     expect(screen.getByText(HOMEPAGE_COPY.sections.warnings)).toBeDefined()
     expect(screen.getByText(HOMEPAGE_COPY.sections.factoryTable)).toBeDefined()

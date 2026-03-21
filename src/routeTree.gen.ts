@@ -11,6 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as BaoxiniaoRouteImport } from './routes/baoxiniao'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TemplatesIndexRouteImport } from './routes/templates/index'
+import { Route as CasesIndexRouteImport } from './routes/cases/index'
+import { Route as TemplatesManufacturingCarbonOverviewRouteImport } from './routes/templates/manufacturing-carbon-overview'
+import { Route as CasesBaoxiniaoCarbonCockpitRouteImport } from './routes/cases/baoxiniao-carbon-cockpit'
 
 const BaoxiniaoRoute = BaoxiniaoRouteImport.update({
   id: '/baoxiniao',
@@ -22,31 +26,88 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TemplatesIndexRoute = TemplatesIndexRouteImport.update({
+  id: '/templates/',
+  path: '/templates/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CasesIndexRoute = CasesIndexRouteImport.update({
+  id: '/cases/',
+  path: '/cases/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TemplatesManufacturingCarbonOverviewRoute =
+  TemplatesManufacturingCarbonOverviewRouteImport.update({
+    id: '/templates/manufacturing-carbon-overview',
+    path: '/templates/manufacturing-carbon-overview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CasesBaoxiniaoCarbonCockpitRoute =
+  CasesBaoxiniaoCarbonCockpitRouteImport.update({
+    id: '/cases/baoxiniao-carbon-cockpit',
+    path: '/cases/baoxiniao-carbon-cockpit',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/baoxiniao': typeof BaoxiniaoRoute
+  '/cases/baoxiniao-carbon-cockpit': typeof CasesBaoxiniaoCarbonCockpitRoute
+  '/templates/manufacturing-carbon-overview': typeof TemplatesManufacturingCarbonOverviewRoute
+  '/cases/': typeof CasesIndexRoute
+  '/templates/': typeof TemplatesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/baoxiniao': typeof BaoxiniaoRoute
+  '/cases/baoxiniao-carbon-cockpit': typeof CasesBaoxiniaoCarbonCockpitRoute
+  '/templates/manufacturing-carbon-overview': typeof TemplatesManufacturingCarbonOverviewRoute
+  '/cases': typeof CasesIndexRoute
+  '/templates': typeof TemplatesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/baoxiniao': typeof BaoxiniaoRoute
+  '/cases/baoxiniao-carbon-cockpit': typeof CasesBaoxiniaoCarbonCockpitRoute
+  '/templates/manufacturing-carbon-overview': typeof TemplatesManufacturingCarbonOverviewRoute
+  '/cases/': typeof CasesIndexRoute
+  '/templates/': typeof TemplatesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/baoxiniao'
+  fullPaths:
+    | '/'
+    | '/baoxiniao'
+    | '/cases/baoxiniao-carbon-cockpit'
+    | '/templates/manufacturing-carbon-overview'
+    | '/cases/'
+    | '/templates/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/baoxiniao'
-  id: '__root__' | '/' | '/baoxiniao'
+  to:
+    | '/'
+    | '/baoxiniao'
+    | '/cases/baoxiniao-carbon-cockpit'
+    | '/templates/manufacturing-carbon-overview'
+    | '/cases'
+    | '/templates'
+  id:
+    | '__root__'
+    | '/'
+    | '/baoxiniao'
+    | '/cases/baoxiniao-carbon-cockpit'
+    | '/templates/manufacturing-carbon-overview'
+    | '/cases/'
+    | '/templates/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BaoxiniaoRoute: typeof BaoxiniaoRoute
+  CasesBaoxiniaoCarbonCockpitRoute: typeof CasesBaoxiniaoCarbonCockpitRoute
+  TemplatesManufacturingCarbonOverviewRoute: typeof TemplatesManufacturingCarbonOverviewRoute
+  CasesIndexRoute: typeof CasesIndexRoute
+  TemplatesIndexRoute: typeof TemplatesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +126,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/templates/': {
+      id: '/templates/'
+      path: '/templates'
+      fullPath: '/templates/'
+      preLoaderRoute: typeof TemplatesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cases/': {
+      id: '/cases/'
+      path: '/cases'
+      fullPath: '/cases/'
+      preLoaderRoute: typeof CasesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/templates/manufacturing-carbon-overview': {
+      id: '/templates/manufacturing-carbon-overview'
+      path: '/templates/manufacturing-carbon-overview'
+      fullPath: '/templates/manufacturing-carbon-overview'
+      preLoaderRoute: typeof TemplatesManufacturingCarbonOverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cases/baoxiniao-carbon-cockpit': {
+      id: '/cases/baoxiniao-carbon-cockpit'
+      path: '/cases/baoxiniao-carbon-cockpit'
+      fullPath: '/cases/baoxiniao-carbon-cockpit'
+      preLoaderRoute: typeof CasesBaoxiniaoCarbonCockpitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BaoxiniaoRoute: BaoxiniaoRoute,
+  CasesBaoxiniaoCarbonCockpitRoute: CasesBaoxiniaoCarbonCockpitRoute,
+  TemplatesManufacturingCarbonOverviewRoute:
+    TemplatesManufacturingCarbonOverviewRoute,
+  CasesIndexRoute: CasesIndexRoute,
+  TemplatesIndexRoute: TemplatesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

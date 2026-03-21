@@ -1,4 +1,4 @@
-import type { EmissionStructureItem } from "@/lib/homepage/types"
+import type { EmissionStructureItem } from "@/features/templates/manufacturing-carbon-overview/types"
 
 export interface BaoxiniaoHomepageMeta {
   pageTitle: string

@@ -2,7 +2,7 @@ import type {
   FactoryStatus,
   KpiMetricKey,
   WarningLevel,
-} from "@/lib/homepage/types"
+} from "@/features/templates/manufacturing-carbon-overview/types"
 
 export const HOMEPAGE_COPY = {
   pageTitle: "制造业能碳总览首页",

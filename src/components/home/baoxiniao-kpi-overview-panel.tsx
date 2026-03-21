@@ -1,4 +1,4 @@
-import type { BaoxiniaoKpiItem } from "@/lib/baoxiniao-homepage/types"
+import type { BaoxiniaoKpiItem } from "@/features/cases/baoxiniao-carbon-cockpit/types"
 import { cn } from "@/lib/utils"
 
 export interface BaoxiniaoKpiOverviewPanelProps {
@@ -37,10 +37,7 @@ export function BaoxiniaoKpiOverviewPanel({
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2 sm:gap-3.5">
         {heroMetrics.map((metric) => (
-          <article
-            key={metric.id}
-            className="px-0 py-1"
-          >
+          <article key={metric.id} className="px-0 py-1">
             <div className="text-[0.88rem] font-medium text-slate-700/92">
               {metric.label}
             </div>
@@ -67,10 +64,7 @@ export function BaoxiniaoKpiOverviewPanel({
         {supportMetrics.map((metric, index) => (
           <article
             key={metric.id}
-            className={cn(
-              "min-w-0 space-y-1.5",
-              index > 1 && "sm:pt-1"
-            )}
+            className={cn("min-w-0 space-y-1.5", index > 1 && "sm:pt-1")}
           >
             <div className="text-[0.82rem] font-medium text-slate-500/88">
               {metric.label}
@@ -86,7 +80,9 @@ export function BaoxiniaoKpiOverviewPanel({
               ) : null}
             </div>
             {metric.hint ? (
-              <div className="text-[0.74rem] text-slate-500/78">{metric.hint}</div>
+              <div className="text-[0.74rem] text-slate-500/78">
+                {metric.hint}
+              </div>
             ) : null}
           </article>
         ))}
