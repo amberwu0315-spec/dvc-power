@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest"
 import { DashboardAssetLibraryHomePage } from "@/routes/index"
 
 describe("DashboardAssetLibraryHomePage", () => {
-  it("renders template and case groups in the unified entry page", () => {
+  it("renders simplified asset cards without the middle detail blocks", () => {
     render(<DashboardAssetLibraryHomePage />)
 
     expect(
@@ -24,7 +24,12 @@ describe("DashboardAssetLibraryHomePage", () => {
     expect(
       screen.getByText("派生自 manufacturing-carbon-overview")
     ).toBeDefined()
-    expect(screen.getByText("查看 通用模板")).toBeDefined()
-    expect(screen.getByText("查看 具体案例")).toBeDefined()
+    expect(screen.getAllByText("进入页面")).toHaveLength(2)
+    expect(screen.queryByText("查看 通用模板")).toBeNull()
+    expect(screen.queryByText("查看 具体案例")).toBeNull()
+    expect(screen.queryByText("模块清单")).toBeNull()
+    expect(screen.queryByText("图表类型")).toBeNull()
+    expect(screen.queryByText("假数据需求")).toBeNull()
+    expect(screen.queryByText("为什么这样组织")).toBeNull()
   })
 })

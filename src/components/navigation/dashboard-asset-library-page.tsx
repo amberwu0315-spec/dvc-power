@@ -1,7 +1,6 @@
 import { Badge } from "@/components/ui/badge"
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -70,43 +69,6 @@ export function DashboardAssetLibraryPage({
           </div>
         </header>
 
-        {!kind ? (
-          <section className="grid gap-4 lg:grid-cols-2">
-            {dashboardAssetGroupEntries.map(([groupKey, group]) => (
-              <Card
-                key={groupKey}
-                className="stack-card border border-white/10 bg-white/5 py-0 text-white"
-              >
-                <CardHeader className="gap-2 border-b border-white/10 py-5">
-                  <Badge
-                    variant="outline"
-                    className="w-fit border-white/15 bg-white/10 text-slate-200"
-                  >
-                    {group.title}
-                  </Badge>
-                  <CardTitle className="text-xl text-white">
-                    {group.title}
-                  </CardTitle>
-                  <CardDescription className="max-w-xl text-slate-300">
-                    {group.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardFooter className="border-t border-white/10 py-4">
-                  <a
-                    href={group.routePath}
-                    className={cn(
-                      buttonVariants({ variant: "outline", size: "lg" }),
-                      "border-white/15 bg-white/5 text-white hover:bg-white/10"
-                    )}
-                  >
-                    查看 {group.title}
-                  </a>
-                </CardFooter>
-              </Card>
-            ))}
-          </section>
-        ) : null}
-
         <div className="grid gap-6">
           {groupEntries.map(([groupKey, group]) => {
             const assets = getDashboardAssets(groupKey as DashboardAssetKind)
@@ -171,32 +133,11 @@ export function DashboardAssetLibraryPage({
                         </div>
                       </CardHeader>
 
-                      <CardContent className="grid gap-5 py-5 text-sm text-slate-200">
-                        <AssetInfoBlock
-                          label="模块清单"
-                          items={asset.modules}
-                        />
-                        <AssetInfoBlock
-                          label="图表类型"
-                          items={asset.chartTypes}
-                        />
-                        <AssetInfoBlock
-                          label="假数据需求"
-                          items={asset.fakeDataNeeds}
-                        />
-                        <div className="grid gap-2">
-                          <p className="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">
-                            为什么这样组织
-                          </p>
-                          <p className="leading-6 text-slate-300">
-                            {asset.organizationReason}
-                          </p>
-                        </div>
-                      </CardContent>
-
                       <CardFooter className="border-t border-white/10 py-4">
                         <a
                           href={asset.routePath}
+                          target="_blank"
+                          rel="noreferrer"
                           className={cn(
                             buttonVariants({ variant: "outline", size: "lg" }),
                             "border-white/15 bg-white/5 text-white hover:bg-white/10"
@@ -214,25 +155,5 @@ export function DashboardAssetLibraryPage({
         </div>
       </div>
     </main>
-  )
-}
-
-function AssetInfoBlock({ label, items }: { label: string; items: string[] }) {
-  return (
-    <div className="grid gap-2">
-      <p className="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">
-        {label}
-      </p>
-      <ul className="grid gap-2 text-slate-200">
-        {items.map((item) => (
-          <li
-            key={item}
-            className="rounded-2xl border border-white/8 bg-black/15 px-3 py-2 leading-6"
-          >
-            {item}
-          </li>
-        ))}
-      </ul>
-    </div>
   )
 }
