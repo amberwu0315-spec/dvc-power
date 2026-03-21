@@ -3,10 +3,12 @@ import { cn } from "@/lib/utils"
 
 export interface BaoxiniaoKpiOverviewPanelProps {
   metrics: BaoxiniaoKpiItem[]
+  className?: string
 }
 
 export function BaoxiniaoKpiOverviewPanel({
   metrics,
+  className,
 }: BaoxiniaoKpiOverviewPanelProps) {
   const statusMetric = metrics.find((metric) => metric.emphasis === "status")
   const numericMetrics = metrics.filter(
@@ -16,7 +18,12 @@ export function BaoxiniaoKpiOverviewPanel({
   const supportMetrics = numericMetrics.slice(2)
 
   return (
-    <section className="baoxiniao-float-card baoxiniao-kpi-board rounded-[1.95rem] px-4 py-4 sm:px-5 sm:py-5">
+    <section
+      className={cn(
+        "baoxiniao-float-card baoxiniao-kpi-board flex h-full flex-col rounded-[1.95rem] px-4 py-4 sm:px-5 sm:py-5",
+        className
+      )}
+    >
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <div className="text-[0.72rem] font-medium tracking-[0.3em] text-slate-500/86 uppercase">

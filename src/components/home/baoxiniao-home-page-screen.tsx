@@ -1,7 +1,10 @@
 import type { ReactNode } from "react"
 
 import { BaoxiniaoKpiOverviewPanel } from "@/components/home/baoxiniao-kpi-overview-panel"
-import { BaoxiniaoSceneVisualPanel } from "@/components/home/baoxiniao-scene-visual-panel"
+import {
+  BaoxiniaoSceneVisualPanel,
+  type BaoxiniaoSceneStatusItem,
+} from "@/components/home/baoxiniao-scene-visual-panel"
 import { EmissionStructurePanel } from "@/components/home/emission-structure-panel"
 import { FactoryRankingPanel } from "@/components/home/factory-ranking-panel"
 import type { BaoxiniaoHomepageData } from "@/lib/baoxiniao-homepage/types"
@@ -15,88 +18,128 @@ const piePalette = ["#11a6a7", "#22bec2", "#49ccd0", "#96e1e3"]
 export function BaoxiniaoHomePageScreen({
   data,
 }: BaoxiniaoHomePageScreenProps) {
+  const sceneStatusItems = buildSceneStatusItems(data)
+
   return (
     <main className="baoxiniao-page h-svh overflow-hidden text-slate-900">
       <div className="flex h-svh flex-col">
-        <div className="px-0 pt-0">
+        <div className="shrink-0 px-0 pt-0">
           <BaoxiniaoTopBar data={data} />
         </div>
 
-        <div className="mx-auto flex min-h-0 w-full max-w-[1920px] flex-1 px-4 pb-4 sm:px-5 sm:pb-5 xl:px-6 xl:pb-6">
-          <div className="relative min-h-0 flex-1">
-          <BaoxiniaoSceneVisualPanel
-            markers={data.scene.markers}
-            className="absolute inset-0 z-0"
-          />
+        <section className="flex min-h-0 w-full flex-1 px-4 pb-4 pt-3 sm:px-5 sm:pb-5 sm:pt-4 xl:px-6 xl:pb-6 xl:pt-5">
+          <div className="grid h-full min-h-0 w-full gap-4 sm:gap-5 xl:gap-6 lg:grid-cols-[minmax(21rem,23rem)_minmax(0,1fr)_minmax(21rem,23rem)] xl:grid-cols-[26rem_minmax(0,1fr)_26rem] 2xl:grid-cols-[27rem_minmax(0,1fr)_27rem]">
+            <aside className="min-h-0">
+              <div className="flex h-full min-h-0 flex-col gap-4 sm:gap-5 xl:gap-6">
+                <div className="min-h-0 flex-[1.26]">
+                  <BaoxiniaoKpiOverviewPanel
+                    metrics={data.overviewKpis}
+                    className="baoxiniao-rail-card baoxiniao-rail-card--hero rounded-[1.9rem]"
+                  />
+                </div>
 
-          <div className="relative z-10 grid h-full min-h-0 gap-4 p-4 sm:gap-4 sm:p-5 xl:grid-cols-[minmax(18rem,0.92fr)_minmax(0,1.16fr)_minmax(18rem,0.92fr)] xl:grid-rows-[minmax(0,1fr)_minmax(0,1fr)] xl:gap-x-5 xl:gap-y-4 xl:p-5">
-            <div className="w-full xl:max-w-[29rem] xl:self-start xl:justify-self-start">
-              <BaoxiniaoKpiOverviewPanel metrics={data.overviewKpis} />
-            </div>
+                <div className="min-h-0 flex-[0.92]">
+                  <EmissionStructurePanel
+                    data={data.organizationFootprintShare}
+                    title="组织碳足迹范围占比"
+                    description=""
+                    chartType="pie"
+                    tone="light"
+                    headerAside={<PanelArrowIcon />}
+                    showTotalInHeader={false}
+                    showSummaryShell={false}
+                    legendStyle="plain"
+                    legendValueFormatter={(item) => `${item.percent.toFixed(2)}%`}
+                    palette={piePalette}
+                    className="baoxiniao-rail-card baoxiniao-rail-card--secondary h-full rounded-[1.7rem]"
+                    contentClassName="px-4 pb-4 pt-3.5"
+                  />
+                </div>
+              </div>
+            </aside>
 
-            <div className="hidden xl:block" />
-
-            <div className="w-full xl:max-w-[29rem] xl:self-start xl:justify-self-end">
-              <FactoryRankingPanel
-                data={data.productFootprintRanking}
-                title="产品碳足迹 top 5 (kgCO₂e)"
-                description=""
-                summary={null}
-                tone="light"
-                valueFormatter={(value) => value.toFixed(4)}
-                headerAside={<PanelArrowIcon />}
-                showCollapsedSummary={false}
-                showSummary={false}
-                listStyle="plain"
-                showRankBadge={false}
-                className="baoxiniao-float-card rounded-[1.75rem]"
-                contentClassName="gap-2.5 px-4 pb-3.5 pt-3"
+            <section className="baoxiniao-visual-stage min-h-[26rem] lg:min-h-0">
+              <BaoxiniaoSceneVisualPanel
+                markers={data.scene.markers}
+                title="总部园区主视觉"
+                subtitle="保留建筑主体作为核心视觉，承接组织级总览信息与分析信息带。"
+                statusItems={sceneStatusItems}
+                className="absolute inset-0 z-0"
               />
-            </div>
+            </section>
 
-            <div className="w-full xl:max-w-[29rem] xl:self-end xl:justify-self-start">
-              <EmissionStructurePanel
-                data={data.organizationFootprintShare}
-                title="组织碳足迹范围占比"
-                description=""
-                chartType="pie"
-                tone="light"
-                headerAside={<PanelArrowIcon />}
-                showTotalInHeader={false}
-                showSummaryShell={false}
-                legendStyle="plain"
-                legendValueFormatter={(item) => `${item.percent.toFixed(2)}%`}
-                palette={piePalette}
-                className="baoxiniao-float-card rounded-[1.75rem]"
-                contentClassName="px-4 pb-3.5 pt-3"
-              />
-            </div>
+            <aside className="min-h-0">
+              <div className="flex h-full min-h-0 flex-col gap-4 sm:gap-5 xl:gap-6">
+                <div className="min-h-0 flex-[1.02]">
+                  <FactoryRankingPanel
+                    data={data.productFootprintRanking}
+                    title="产品碳足迹 top 5 (kgCO₂e)"
+                    description=""
+                    summary={null}
+                    tone="light"
+                    valueFormatter={(value) => value.toFixed(4)}
+                    headerAside={<PanelArrowIcon />}
+                    showCollapsedSummary={false}
+                    showSummary={false}
+                    listStyle="plain"
+                    showRankBadge={false}
+                    className="baoxiniao-rail-card baoxiniao-rail-card--analysis h-full rounded-[1.7rem]"
+                    contentClassName="gap-3 px-4 pb-4 pt-3.5"
+                  />
+                </div>
 
-            <div className="hidden xl:block" />
-
-            <div className="w-full xl:max-w-[29rem] xl:self-end xl:justify-self-end">
-              <EmissionStructurePanel
-                data={data.projectTypeShare}
-                title="减排项目类型占比"
-                description=""
-                chartType="pie"
-                tone="light"
-                headerAside={<PanelArrowIcon />}
-                showTotalInHeader={false}
-                showSummaryShell={false}
-                legendStyle="plain"
-                legendValueFormatter={(item) => `${item.percent.toFixed(2)}%`}
-                palette={piePalette}
-                className="baoxiniao-float-card rounded-[1.75rem]"
-                contentClassName="px-4 pb-3.5 pt-3"
-              />
-            </div>
+                <div className="min-h-0 flex-[0.92]">
+                  <EmissionStructurePanel
+                    data={data.projectTypeShare}
+                    title="减排项目类型占比"
+                    description=""
+                    chartType="pie"
+                    tone="light"
+                    headerAside={<PanelArrowIcon />}
+                    showTotalInHeader={false}
+                    showSummaryShell={false}
+                    legendStyle="plain"
+                    legendValueFormatter={(item) => `${item.percent.toFixed(2)}%`}
+                    palette={piePalette}
+                    className="baoxiniao-rail-card baoxiniao-rail-card--secondary h-full rounded-[1.7rem]"
+                    contentClassName="px-4 pb-4 pt-3.5"
+                  />
+                </div>
+              </div>
+            </aside>
           </div>
-        </div>
-      </div>
+        </section>
       </div>
     </main>
   )
+}
+
+function buildSceneStatusItems(
+  data: BaoxiniaoHomepageData
+): BaoxiniaoSceneStatusItem[] {
+  const scopeThreeShare =
+    data.organizationFootprintShare.find((item) => item.category === "范围三") ??
+    data.organizationFootprintShare.reduce((max, item) =>
+      item.percent > max.percent ? item : max
+    )
+  const highestFootprintProduct = data.productFootprintRanking.reduce((max, item) =>
+    item.value > max.value ? item : max
+  )
+
+  return [
+    {
+      label: "组织主体",
+      value: `${data.pageMeta.organizationName} · ${data.pageMeta.yearLabel}`,
+    },
+    {
+      label: "范围三占比",
+      value: `${scopeThreeShare.percent.toFixed(1)}%`,
+    },
+    {
+      label: "高值产品足迹",
+      value: `${highestFootprintProduct.value.toFixed(2)} kgCO2e`,
+    },
+  ]
 }
 
 function BaoxiniaoTopBar({ data }: { data: BaoxiniaoHomepageData }) {
@@ -271,7 +314,7 @@ function SunIcon() {
 
 function PanelArrowIcon() {
   return (
-    <span className="inline-flex size-7 items-center justify-center rounded-full border border-white/52 bg-white/26 text-slate-500 shadow-[0_16px_30px_-24px_rgba(63,81,108,0.38)] backdrop-blur-xl">
+    <span className="inline-flex size-7 items-center justify-center rounded-full border border-white/38 bg-white/18 text-slate-500 shadow-[0_14px_26px_-24px_rgba(63,81,108,0.24)] backdrop-blur-xl">
       <svg viewBox="0 0 16 16" className="size-4" aria-hidden="true">
         <path
           d="m6.1 3.5 4 4.5-4 4.5"
