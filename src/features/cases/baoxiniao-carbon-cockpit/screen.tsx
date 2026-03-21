@@ -1,4 +1,10 @@
-import type { ReactNode } from "react"
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react"
 
 import { BaoxiniaoKpiOverviewPanel } from "@/components/home/baoxiniao-kpi-overview-panel"
 import {
@@ -12,6 +18,8 @@ import type { BaoxiniaoHomepageData } from "@/features/cases/baoxiniao-carbon-co
 const piePalette = ["#11a6a7", "#22bec2", "#49ccd0", "#96e1e3"]
 const sidePanelShellClassName =
   "baoxiniao-shell-card h-full gap-0 py-0 rounded-[18px]"
+const BAOXINIAO_DESIGN_WIDTH = 1760
+const BAOXINIAO_DESIGN_HEIGHT = 900
 
 export interface BaoxiniaoCarbonCockpitScreenProps {
   data: BaoxiniaoHomepageData
@@ -21,104 +29,203 @@ export function BaoxiniaoCarbonCockpitScreen({
   data,
 }: BaoxiniaoCarbonCockpitScreenProps) {
   const sceneStatusItems = buildSceneStatusItems(data)
+  const viewport = useViewportSize()
+  const contentRef = useRef<HTMLDivElement | null>(null)
+  const scale = getScale(viewport.width, viewport.height)
+  const scaledWidth = Math.round(BAOXINIAO_DESIGN_WIDTH * scale)
+  const scaledHeight = useScaledContentHeight(contentRef, scale)
 
   return (
     <main className="baoxiniao-page h-svh overflow-hidden text-slate-900">
-      <div className="flex h-svh flex-col">
-        <div className="shrink-0 px-0 pt-0">
-          <BaoxiniaoTopBar data={data} />
-        </div>
-
-        <section className="flex min-h-0 w-full flex-1 px-4 pt-3 pb-4 sm:px-5 sm:pt-4 sm:pb-5 xl:px-6 xl:pt-5 xl:pb-6">
-          <div className="grid h-full min-h-0 w-full gap-4 sm:gap-5 lg:grid-cols-[minmax(21rem,23rem)_minmax(0,1fr)_minmax(21rem,23rem)] xl:grid-cols-[26rem_minmax(0,1fr)_26rem] xl:gap-6 2xl:grid-cols-[27rem_minmax(0,1fr)_27rem]">
-            <aside className="baoxiniao-side-band baoxiniao-side-band--left min-h-0">
-              <div className="baoxiniao-side-stack flex h-full min-h-0 flex-col gap-3 sm:gap-4 xl:gap-[1.125rem]">
-                <div className="min-h-0 flex-[0.96]">
-                  <BaoxiniaoKpiOverviewPanel
-                    metrics={data.overviewKpis}
-                    className="baoxiniao-rail-card baoxiniao-kpi-board rounded-[18px]"
-                  />
-                </div>
-
-                <div className="min-h-0 flex-[1.11]">
-                  <EmissionStructurePanel
-                    data={data.projectTypeShare}
-                    title="减排项目类型占比"
-                    description=""
-                    chartType="pie"
-                    tone="light"
-                    headerAside={
-                      <span
-                        className="inline-flex size-7 opacity-0"
-                        aria-hidden="true"
-                      />
-                    }
-                    showTotalInHeader={false}
-                    showSummaryShell={false}
-                    legendStyle="plain"
-                    showLegendValue={false}
-                    palette={piePalette}
-                    className={sidePanelShellClassName}
-                    contentClassName="px-5 pb-4 pt-3.5"
-                  />
-                </div>
+      <div className="flex h-svh w-full items-start justify-center overflow-hidden">
+        <div
+          className="relative shrink-0"
+          style={{
+            width: `${scaledWidth}px`,
+            height: `${scaledHeight}px`,
+          }}
+        >
+          <div
+            ref={contentRef}
+            className="origin-top-left"
+            style={{
+              width: `${BAOXINIAO_DESIGN_WIDTH}px`,
+              transform: `scale(${scale})`,
+            }}
+          >
+            <div
+              className="flex flex-col"
+              style={{ minHeight: `${BAOXINIAO_DESIGN_HEIGHT}px` }}
+            >
+              <div className="shrink-0 px-0 pt-0">
+                <BaoxiniaoTopBar data={data} />
               </div>
-            </aside>
 
-            <section className="baoxiniao-visual-stage min-h-[26rem] lg:min-h-0">
-              <BaoxiniaoSceneVisualPanel
-                markers={data.scene.markers}
-                title="总部园区主视觉"
-                subtitle="保留建筑主体作为核心视觉，承接组织级总览信息与分析信息带。"
-                statusItems={sceneStatusItems}
-                className="absolute inset-0 z-0"
-              />
-            </section>
+              <section className="flex min-h-0 w-full flex-1 px-4 pt-3 pb-4 sm:px-5 sm:pt-4 sm:pb-5 xl:px-6 xl:pt-5 xl:pb-6">
+                <div className="grid h-full min-h-0 w-full gap-4 sm:gap-5 lg:grid-cols-[minmax(21rem,23rem)_minmax(0,1fr)_minmax(21rem,23rem)] xl:grid-cols-[26rem_minmax(0,1fr)_26rem] xl:gap-6 2xl:grid-cols-[27rem_minmax(0,1fr)_27rem]">
+                  <aside className="baoxiniao-side-band baoxiniao-side-band--left min-h-0">
+                    <div className="baoxiniao-side-stack flex h-full min-h-0 flex-col gap-3 sm:gap-4 xl:gap-[1.125rem]">
+                      <div className="min-h-0 flex-[0.96]">
+                        <BaoxiniaoKpiOverviewPanel
+                          metrics={data.overviewKpis}
+                          className="baoxiniao-rail-card baoxiniao-kpi-board rounded-[18px]"
+                        />
+                      </div>
 
-            <aside className="baoxiniao-side-band baoxiniao-side-band--right min-h-0">
-              <div className="baoxiniao-side-stack flex h-full min-h-0 flex-col gap-3 sm:gap-4 xl:gap-[1.125rem]">
-                <div className="min-h-0 flex-[0.82]">
-                  <FactoryRankingPanel
-                    data={data.productFootprintRanking}
-                    title="产品碳足迹 top 5 (kgCO₂e)"
-                    description=""
-                    summary={null}
-                    tone="light"
-                    valueFormatter={(value) => value.toFixed(4)}
-                    headerAside={<PanelArrowIcon />}
-                    showCollapsedSummary={false}
-                    showSummary={false}
-                    listStyle="plain"
-                    showRankBadge={false}
-                    className={sidePanelShellClassName}
-                    contentClassName="gap-2.5 px-5 pb-3 pt-3.5"
-                  />
+                      <div className="min-h-0 flex-[1.11]">
+                        <EmissionStructurePanel
+                          data={data.projectTypeShare}
+                          title="减排项目类型占比"
+                          description=""
+                          chartType="pie"
+                          tone="light"
+                          headerAside={
+                            <span
+                              className="inline-flex size-7 opacity-0"
+                              aria-hidden="true"
+                            />
+                          }
+                          showTotalInHeader={false}
+                          showSummaryShell={false}
+                          legendStyle="plain"
+                          showLegendValue={false}
+                          palette={piePalette}
+                          className={sidePanelShellClassName}
+                          contentClassName="px-5 pb-4 pt-3.5"
+                        />
+                      </div>
+                    </div>
+                  </aside>
+
+                  <section className="baoxiniao-visual-stage min-h-[26rem] lg:min-h-0">
+                    <BaoxiniaoSceneVisualPanel
+                      markers={data.scene.markers}
+                      title="总部园区主视觉"
+                      subtitle="保留建筑主体作为核心视觉，承接组织级总览信息与分析信息带。"
+                      statusItems={sceneStatusItems}
+                      className="absolute inset-0 z-0"
+                    />
+                  </section>
+
+                  <aside className="baoxiniao-side-band baoxiniao-side-band--right min-h-0">
+                    <div className="baoxiniao-side-stack flex h-full min-h-0 flex-col gap-3 sm:gap-4 xl:gap-[1.125rem]">
+                      <div className="min-h-0 flex-[0.82]">
+                        <FactoryRankingPanel
+                          data={data.productFootprintRanking}
+                          title="产品碳足迹 top 5 (kgCO₂e)"
+                          description=""
+                          summary={null}
+                          tone="light"
+                          valueFormatter={(value) => value.toFixed(4)}
+                          headerAside={<PanelArrowIcon />}
+                          showCollapsedSummary={false}
+                          showSummary={false}
+                          listStyle="plain"
+                          showRankBadge={false}
+                          className={sidePanelShellClassName}
+                          contentClassName="gap-2.5 px-5 pb-3 pt-3.5"
+                        />
+                      </div>
+
+                      <div className="min-h-0 flex-[1.18]">
+                        <EmissionStructurePanel
+                          data={data.organizationFootprintShare}
+                          title="组织碳足迹范围占比"
+                          description=""
+                          chartType="pie"
+                          tone="light"
+                          headerAside={<PanelArrowIcon />}
+                          showTotalInHeader={false}
+                          showSummaryShell={false}
+                          legendStyle="plain"
+                          showLegendValue={false}
+                          palette={piePalette}
+                          className={sidePanelShellClassName}
+                          contentClassName="px-5 pb-4 pt-3.5"
+                        />
+                      </div>
+                    </div>
+                  </aside>
                 </div>
-
-                <div className="min-h-0 flex-[1.18]">
-                  <EmissionStructurePanel
-                    data={data.organizationFootprintShare}
-                    title="组织碳足迹范围占比"
-                    description=""
-                    chartType="pie"
-                    tone="light"
-                    headerAside={<PanelArrowIcon />}
-                    showTotalInHeader={false}
-                    showSummaryShell={false}
-                    legendStyle="plain"
-                    showLegendValue={false}
-                    palette={piePalette}
-                    className={sidePanelShellClassName}
-                    contentClassName="px-5 pb-4 pt-3.5"
-                  />
-                </div>
-              </div>
-            </aside>
+              </section>
+            </div>
           </div>
-        </section>
+        </div>
       </div>
     </main>
   )
+}
+
+function useViewportSize() {
+  const [viewport, setViewport] = useState(() => ({
+    width:
+      typeof window === "undefined" ? BAOXINIAO_DESIGN_WIDTH : window.innerWidth,
+    height:
+      typeof window === "undefined" ? 900 : window.innerHeight,
+  }))
+
+  useEffect(() => {
+    const updateViewport = () => {
+      setViewport({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      })
+    }
+
+    updateViewport()
+    window.addEventListener("resize", updateViewport)
+
+    return () => {
+      window.removeEventListener("resize", updateViewport)
+    }
+  }, [])
+
+  return viewport
+}
+
+function useScaledContentHeight(
+  ref: React.RefObject<HTMLDivElement | null>,
+  scale: number
+) {
+  const [height, setHeight] = useState(BAOXINIAO_DESIGN_HEIGHT)
+
+  useLayoutEffect(() => {
+    const element = ref.current
+
+    if (!element) {
+      return
+    }
+
+    const updateHeight = () => {
+      setHeight(Math.ceil(element.offsetHeight * scale))
+    }
+
+    updateHeight()
+
+    const resizeObserver =
+      typeof ResizeObserver === "undefined"
+        ? null
+        : new ResizeObserver(() => {
+            updateHeight()
+          })
+
+    resizeObserver?.observe(element)
+    window.addEventListener("resize", updateHeight)
+
+    return () => {
+      resizeObserver?.disconnect()
+      window.removeEventListener("resize", updateHeight)
+    }
+  }, [ref, scale])
+
+  return height
+}
+
+function getScale(viewportWidth: number, viewportHeight: number) {
+  const widthScale = viewportWidth / BAOXINIAO_DESIGN_WIDTH
+  const heightScale = viewportHeight / BAOXINIAO_DESIGN_HEIGHT
+
+  return Math.min(widthScale, heightScale, 1)
 }
 
 function buildSceneStatusItems(
