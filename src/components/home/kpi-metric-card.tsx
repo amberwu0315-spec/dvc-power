@@ -1,6 +1,9 @@
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
-import type { KpiMetric, TrendDirection } from "@/lib/homepage/types"
+import type {
+  KpiMetric,
+  TrendDirection,
+} from "@/features/templates/manufacturing-carbon-overview/types"
 
 export interface KpiMetricCardProps {
   metric: KpiMetric
@@ -63,7 +66,10 @@ export function KpiMetricCard({ metric }: KpiMetricCardProps) {
 
         <Badge
           variant="outline"
-          className={cn("border px-2.5 py-1 text-[0.65rem]", trend.badgeClassName)}
+          className={cn(
+            "border px-2.5 py-1 text-[0.65rem]",
+            trend.badgeClassName
+          )}
         >
           {trend.label}
         </Badge>

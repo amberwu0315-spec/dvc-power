@@ -1,7 +1,10 @@
 import { Badge } from "@/components/ui/badge"
 import { DashboardSectionCard } from "@/components/home/dashboard-section-card"
-import { HOMEPAGE_COPY, WARNING_LEVEL_META } from "@/lib/homepage/constants"
-import type { WarningItem } from "@/lib/homepage/types"
+import {
+  HOMEPAGE_COPY,
+  WARNING_LEVEL_META,
+} from "@/features/templates/manufacturing-carbon-overview/constants"
+import type { WarningItem } from "@/features/templates/manufacturing-carbon-overview/types"
 import { cn } from "@/lib/utils"
 
 export interface WarningListPanelProps {

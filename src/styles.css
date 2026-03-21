@@ -193,4 +193,608 @@
   .stack-chip {
     background: color-mix(in oklab, var(--background) 76%, var(--card) 24%);
   }
+
+  .baoxiniao-page {
+    position: relative;
+    isolation: isolate;
+    background:
+      radial-gradient(
+        circle at 50% 16%,
+        rgba(255, 255, 255, 0.82),
+        rgba(244, 248, 251, 0.5) 26%,
+        transparent 56%
+      ),
+      linear-gradient(180deg, #edf3f7 0%, #e9f0f4 100%);
+  }
+
+  .baoxiniao-page::before {
+    content: "";
+    position: absolute;
+    inset: -4%;
+    z-index: -2;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.04) 100%
+      ),
+      url("/baoxiniao-campus-bg.png") center 54% / cover no-repeat;
+    filter: blur(34px) saturate(0.84) brightness(1.02);
+    transform: scale(1.08);
+    transform-origin: center;
+    opacity: 0.82;
+  }
+
+  .baoxiniao-page::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(
+        circle at 16% 24%,
+        rgba(173, 211, 213, 0.16),
+        transparent 24%
+      ),
+      radial-gradient(
+        circle at 84% 18%,
+        rgba(194, 222, 233, 0.18),
+        transparent 24%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.28) 0%,
+        rgba(255, 255, 255, 0.06) 24%,
+        rgba(255, 255, 255, 0.04) 100%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(200, 214, 223, 0.26) 0%,
+        rgba(255, 255, 255, 0) 22%,
+        rgba(255, 255, 255, 0) 78%,
+        rgba(200, 214, 223, 0.26) 100%
+      );
+    pointer-events: none;
+  }
+
+  .baoxiniao-topbar {
+    position: relative;
+    z-index: 10;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .baoxiniao-topbar::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 -2rem 0;
+    height: 2.5rem;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    pointer-events: none;
+  }
+
+  .baoxiniao-visual-stage {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    background: transparent;
+    box-shadow: 0 16px 40px -42px rgba(44, 66, 89, 0.18);
+  }
+
+  .baoxiniao-visual-stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(226, 235, 240, 0.28) 0%,
+        rgba(255, 255, 255, 0) 14%,
+        rgba(255, 255, 255, 0) 86%,
+        rgba(226, 235, 240, 0.28) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.02) 12%,
+        rgba(201, 217, 228, 0.12) 100%
+      );
+    pointer-events: none;
+  }
+
+  .baoxiniao-visual-stage::after {
+    content: "";
+    position: absolute;
+    inset: auto 3% 0 3%;
+    z-index: 0;
+    height: 18%;
+    border-radius: 999px;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0) 74%
+    );
+    filter: blur(28px);
+    pointer-events: none;
+  }
+
+  .baoxiniao-scene {
+    pointer-events: none;
+  }
+
+  .baoxiniao-scene-image {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.015) 0%,
+        rgba(255, 255, 255, 0) 8%,
+        rgba(219, 229, 236, 0.08) 100%
+      ),
+      url("/baoxiniao-campus-bg.png") center 52% / cover no-repeat;
+    filter: saturate(0.96) brightness(0.985);
+    transform: scale(1.02);
+  }
+
+  .baoxiniao-scene-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-position: center;
+    background-size: 80px 80px;
+    mask-image: radial-gradient(circle at center, black 16%, transparent 82%);
+    opacity: 0.26;
+  }
+
+  .baoxiniao-scene-glow {
+    background:
+      radial-gradient(
+        circle at 50% 52%,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.015) 46%,
+        rgba(221, 231, 239, 0.28) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0) 18%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(211, 223, 230, 0.34) 0%,
+        rgba(255, 255, 255, 0) 14%,
+        rgba(255, 255, 255, 0) 86%,
+        rgba(211, 223, 230, 0.34) 100%
+      );
+  }
+
+  .baoxiniao-scene-intro {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 1.35rem;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.18) 0%,
+        rgba(255, 255, 255, 0.08) 100%
+      );
+    padding: 0.9rem 1rem;
+    box-shadow: 0 16px 40px -38px rgba(39, 61, 92, 0.22);
+    backdrop-filter: blur(18px);
+  }
+
+  .baoxiniao-scene-chip {
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.65rem 1rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: rgba(71, 85, 105, 0.74);
+    text-transform: uppercase;
+    box-shadow: 0 14px 34px -32px rgba(39, 61, 92, 0.22);
+    backdrop-filter: blur(18px);
+  }
+
+  .baoxiniao-scene-marker {
+    align-items: center;
+    gap: 0.72rem;
+    transform: translate(-50%, -50%);
+  }
+
+  .baoxiniao-scene-marker--right {
+    flex-direction: row-reverse;
+  }
+
+  .baoxiniao-scene-marker-core {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .baoxiniao-scene-marker-core::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: rgba(73, 204, 208, 0.12);
+    box-shadow: 0 0 0 8px rgba(73, 204, 208, 0.05);
+  }
+
+  .baoxiniao-scene-marker-dot {
+    position: relative;
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    border-radius: 999px;
+    background: rgba(17, 166, 167, 0.88);
+    box-shadow:
+      0 0 0 4px rgba(17, 166, 167, 0.08),
+      0 0 18px rgba(73, 204, 208, 0.28);
+  }
+
+  .baoxiniao-scene-marker-line {
+    width: 2.15rem;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      rgba(17, 166, 167, 0.46),
+      rgba(17, 166, 167, 0) 100%
+    );
+  }
+
+  .baoxiniao-scene-marker--right .baoxiniao-scene-marker-line {
+    background: linear-gradient(
+      270deg,
+      rgba(17, 166, 167, 0.46),
+      rgba(17, 166, 167, 0) 100%
+    );
+  }
+
+  .baoxiniao-scene-marker-label {
+    min-width: 7.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    padding: 0.45rem 0.92rem;
+    font-size: 0.72rem;
+    line-height: 1rem;
+    color: rgba(15, 23, 42, 0.82);
+    box-shadow: 0 14px 32px -30px rgba(37, 61, 88, 0.24);
+    backdrop-filter: blur(18px);
+  }
+
+  .baoxiniao-scene-status {
+    display: grid;
+    gap: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 1.2rem;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.24) 0%,
+        rgba(255, 255, 255, 0.1) 100%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(196, 213, 224, 0.1) 0%,
+        rgba(255, 255, 255, 0) 16%,
+        rgba(255, 255, 255, 0) 84%,
+        rgba(196, 213, 224, 0.1) 100%
+      );
+    padding: 0.95rem 1.1rem 0.9rem;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.42),
+      0 18px 40px -38px rgba(43, 63, 87, 0.22);
+    backdrop-filter: blur(20px);
+  }
+
+  @media (min-width: 768px) {
+    .baoxiniao-scene-status {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .baoxiniao-scene-status-item {
+    min-width: 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.16);
+    padding-left: 1rem;
+  }
+
+  .baoxiniao-scene-status-item:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .baoxiniao-float-card,
+  .baoxiniao-rail-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.14) 54%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    box-shadow:
+      0 14px 28px -26px rgba(56, 73, 97, 0.12),
+      0 6px 12px -12px rgba(85, 107, 140, 0.08);
+    backdrop-filter: blur(16px) saturate(1.02);
+  }
+
+  .baoxiniao-float-card::before,
+  .baoxiniao-rail-card::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.08) 34%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+    pointer-events: none;
+  }
+
+  .baoxiniao-float-card::after,
+  .baoxiniao-rail-card::after {
+    content: "";
+    position: absolute;
+    inset: auto 12% 0 12%;
+    height: 26%;
+    border-radius: 999px;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.1),
+      transparent 72%
+    );
+    filter: blur(26px);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .baoxiniao-float-card > *,
+  .baoxiniao-rail-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .baoxiniao-float-card [data-slot="card-header"],
+  .baoxiniao-rail-card [data-slot="card-header"] {
+    border-color: rgba(255, 255, 255, 0.24);
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.8rem;
+  }
+
+  .baoxiniao-float-card [data-slot="card-title"],
+  .baoxiniao-rail-card [data-slot="card-title"] {
+    font-size: 1.04rem;
+    letter-spacing: 0.08em;
+    color: rgba(15, 23, 42, 0.84);
+  }
+
+  .baoxiniao-float-card [data-slot="card-description"],
+  .baoxiniao-rail-card [data-slot="card-description"] {
+    margin-top: 0.15rem;
+    color: rgba(71, 85, 105, 0.72);
+  }
+
+  .baoxiniao-float-card [data-slot="card-content"],
+  .baoxiniao-rail-card [data-slot="card-content"] {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .baoxiniao-rail-card {
+    height: 100%;
+    border-color: rgba(255, 255, 255, 0.14);
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.24) 0%,
+        rgba(255, 255, 255, 0.1) 46%,
+        rgba(241, 247, 249, 0.04) 100%
+      );
+    box-shadow: 0 12px 22px -24px rgba(53, 75, 100, 0.08);
+  }
+
+  .baoxiniao-rail-card--hero {
+    border-color: rgba(255, 255, 255, 0.16);
+    background:
+      linear-gradient(
+        155deg,
+        rgba(255, 255, 255, 0.32) 0%,
+        rgba(255, 255, 255, 0.12) 54%,
+        rgba(255, 255, 255, 0.06) 100%
+      );
+  }
+
+  .baoxiniao-rail-card--analysis,
+  .baoxiniao-rail-card--secondary {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(255, 255, 255, 0.1) 52%,
+        rgba(255, 255, 255, 0.04) 100%
+      );
+  }
+
+  .baoxiniao-side-band {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .baoxiniao-side-band::before {
+    content: "";
+    position: absolute;
+    inset: 0.75rem 0 0.75rem 0;
+    z-index: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.03) 16%,
+      rgba(255, 255, 255, 0.03) 84%,
+      rgba(255, 255, 255, 0.12) 100%
+    );
+    filter: blur(18px);
+    opacity: 0.85;
+    pointer-events: none;
+  }
+
+  .baoxiniao-side-band--left::before {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(207, 221, 229, 0.18) 0%,
+        rgba(255, 255, 255, 0) 68%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.03) 100%
+      );
+  }
+
+  .baoxiniao-side-band--right::before {
+    background:
+      linear-gradient(
+        270deg,
+        rgba(207, 221, 229, 0.18) 0%,
+        rgba(255, 255, 255, 0) 68%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.03) 100%
+      );
+  }
+
+  .baoxiniao-side-stack {
+    position: relative;
+    z-index: 1;
+  }
+
+  .baoxiniao-side-stack::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: 2rem;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .baoxiniao-kpi-board {
+    border-color: rgba(255, 255, 255, 0.16);
+    background: linear-gradient(
+      140deg,
+      rgba(255, 255, 255, 0.34) 0%,
+      rgba(255, 255, 255, 0.14) 58%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+    box-shadow:
+      0 14px 26px -28px rgba(54, 72, 95, 0.12),
+      0 8px 18px -18px rgba(76, 98, 130, 0.08);
+  }
+
+  .baoxiniao-kpi-board::after {
+    inset: auto 8% 4% 8%;
+    height: 34%;
+    opacity: 0.82;
+  }
+
+  .baoxiniao-shell-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: linear-gradient(
+      140deg,
+      rgba(255, 255, 255, 0.34) 0%,
+      rgba(255, 255, 255, 0.14) 58%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+    box-shadow:
+      0 14px 26px -28px rgba(54, 72, 95, 0.12),
+      0 8px 18px -18px rgba(76, 98, 130, 0.08);
+    backdrop-filter: blur(16px) saturate(1.02);
+  }
+
+  .baoxiniao-shell-card::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.08) 34%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+    pointer-events: none;
+  }
+
+  .baoxiniao-shell-card::after {
+    content: "";
+    position: absolute;
+    inset: auto 8% 4% 8%;
+    height: 34%;
+    border-radius: 999px;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.1),
+      transparent 72%
+    );
+    filter: blur(26px);
+    opacity: 0.82;
+    pointer-events: none;
+  }
+
+  .baoxiniao-shell-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .baoxiniao-shell-card [data-slot="card-header"] {
+    padding-top: 0.75rem;
+  }
+
+  .baoxiniao-scene-status-label {
+    font-size: 0.64rem;
+    line-height: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(100, 116, 139, 0.72);
+  }
+
+  .baoxiniao-scene-status-value {
+    margin-top: 0.3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.02rem;
+    line-height: 1.4rem;
+    font-weight: 500;
+    color: rgba(15, 23, 42, 0.88);
+  }
 }
