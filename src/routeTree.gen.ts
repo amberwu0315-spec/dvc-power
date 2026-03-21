@@ -9,8 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as BaoxiniaoRouteImport } from './routes/baoxiniao'
 import { Route as IndexRouteImport } from './routes/index'
 
+const BaoxiniaoRoute = BaoxiniaoRouteImport.update({
+  id: '/baoxiniao',
+  path: '/baoxiniao',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +25,39 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/baoxiniao': typeof BaoxiniaoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/baoxiniao': typeof BaoxiniaoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/baoxiniao': typeof BaoxiniaoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/baoxiniao'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/baoxiniao'
+  id: '__root__' | '/' | '/baoxiniao'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BaoxiniaoRoute: typeof BaoxiniaoRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/baoxiniao': {
+      id: '/baoxiniao'
+      path: '/baoxiniao'
+      fullPath: '/baoxiniao'
+      preLoaderRoute: typeof BaoxiniaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +70,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BaoxiniaoRoute: BaoxiniaoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

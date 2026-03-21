@@ -193,4 +193,138 @@
   .stack-chip {
     background: color-mix(in oklab, var(--background) 76%, var(--card) 24%);
   }
+
+  .baoxiniao-page {
+    position: relative;
+    isolation: isolate;
+    background: transparent;
+  }
+
+  .baoxiniao-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: url("/baoxiniao-campus-bg.png") center 58% / cover no-repeat;
+    filter: saturate(0.94) brightness(1.03);
+  }
+
+  .baoxiniao-page::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: -1;
+    height: 34vh;
+    background: transparent;
+    pointer-events: none;
+  }
+
+  .baoxiniao-topbar {
+    position: relative;
+    z-index: 10;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .baoxiniao-topbar::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 -2.75rem 0;
+    height: 3.5rem;
+    background: transparent;
+    filter: none;
+    pointer-events: none;
+  }
+
+  .baoxiniao-scene::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    pointer-events: none;
+  }
+
+  .baoxiniao-float-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.56);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.58) 0%,
+      rgba(255, 255, 255, 0.26) 55%,
+      rgba(255, 255, 255, 0.15) 100%
+    );
+    box-shadow:
+      0 28px 62px -46px rgba(56, 73, 97, 0.42),
+      0 12px 26px -22px rgba(85, 107, 140, 0.16);
+    backdrop-filter: blur(14px) saturate(1.01);
+  }
+
+  .baoxiniao-float-card::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.34) 0%,
+      rgba(255, 255, 255, 0.14) 34%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+    pointer-events: none;
+  }
+
+  .baoxiniao-float-card::after {
+    content: "";
+    position: absolute;
+    inset: auto 12% 0 12%;
+    height: 26%;
+    border-radius: 999px;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.22),
+      transparent 72%
+    );
+    filter: blur(26px);
+    opacity: 0.72;
+    pointer-events: none;
+  }
+
+  .baoxiniao-float-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .baoxiniao-float-card [data-slot="card-header"] {
+    border-color: rgba(255, 255, 255, 0.24);
+  }
+
+  .baoxiniao-float-card [data-slot="card-title"] {
+    letter-spacing: 0.08em;
+    color: rgba(15, 23, 42, 0.84);
+  }
+
+  .baoxiniao-float-card [data-slot="card-description"] {
+    color: rgba(71, 85, 105, 0.72);
+  }
+
+  .baoxiniao-kpi-board {
+    background: linear-gradient(
+      140deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0.22) 58%,
+      rgba(255, 255, 255, 0.1) 100%
+    );
+    box-shadow:
+      0 32px 66px -46px rgba(54, 72, 95, 0.46),
+      0 14px 28px -20px rgba(76, 98, 130, 0.16);
+  }
+
+  .baoxiniao-kpi-board::after {
+    inset: auto 8% 4% 8%;
+    height: 34%;
+    opacity: 0.82;
+  }
 }
