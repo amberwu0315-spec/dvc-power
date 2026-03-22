@@ -13,6 +13,7 @@ import {
   type DashboardAssetKind,
 } from "@/lib/dashboard-assets"
 import { cn } from "@/lib/utils"
+import { ProductShell } from "@/components/navigation/product-shell"
 
 export interface DashboardAssetLibraryPageProps {
   kind?: DashboardAssetKind
@@ -37,27 +38,37 @@ export function DashboardAssetLibraryPage({
     : dashboardAssetGroupEntries
 
   return (
-    <main className="dark stack-page min-h-svh bg-background text-foreground">
-      <div className="mx-auto flex min-h-svh w-full max-w-7xl flex-col gap-8 px-4 py-8 sm:px-6 lg:px-8">
+    <ProductShell currentNav={kind === "template" ? "templates" : "cases"}>
+      <div className="grid gap-8">
         <header className="grid gap-4 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_24px_80px_-40px_rgba(0,0,0,0.72)] backdrop-blur-xl sm:p-8">
           <Badge
             variant="outline"
             className="w-fit border-cyan-400/30 bg-cyan-400/10 text-cyan-100"
           >
-            驾驶舱资产目录
+            {kind ? DASHBOARD_ASSET_GROUPS[kind].title : "Asset Entry"}
           </Badge>
           <div className="grid gap-3 lg:grid-cols-[minmax(0,1.4fr)_minmax(18rem,0.8fr)] lg:items-end">
             <div className="grid gap-3">
               <h1 className="font-heading text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-                模板负责复用，案例负责展示
+                {kind === "template"
+                  ? "通用模板负责沉淀可复用骨架"
+                  : kind === "case"
+                    ? "具体案例负责承接品牌化表达"
+                    : "模板负责复用，案例负责展示"}
               </h1>
               <p className="max-w-3xl text-sm leading-6 text-slate-300 sm:text-base">
-                先把制造业能碳总览页沉淀为通用模板，再把报喜鸟页明确收口为从模板派生的客户案例。
-                后续新增页面时，只需要先判断它属于模板还是案例，再按统一命名和路由规则接入。
+                {kind === "template"
+                  ? "这里集中查看可复用页面母版，重点保留制造业能碳总览模板，承接 AI 配置助手输出后的骨架复用需求。"
+                  : kind === "case"
+                    ? "这里集中查看真实案例页面，重点保留报喜鸟碳驾驶舱案例，作为模板品牌化和场景化表达的参考样本。"
+                    : "先把制造业能碳总览页沉淀为通用模板，再把报喜鸟页明确收口为从模板派生的客户案例。后续新增页面时，只需要先判断它属于模板还是案例，再按统一命名和路由规则接入。"}
               </p>
             </div>
             <div className="grid gap-3 rounded-2xl border border-white/10 bg-black/20 p-4 text-sm text-slate-300">
-              <p className="font-medium text-white">统一规则</p>
+              <p className="font-medium text-white">入口关系</p>
+              <p>
+                <code>/assistant</code> 用于前置方案辅助
+              </p>
               <p>
                 <code>templates/&lt;行业或场景 slug&gt;</code> 用于母版沉淀
               </p>
@@ -85,15 +96,26 @@ export function DashboardAssetLibraryPage({
                     </p>
                   </div>
                   {kind ? (
-                    <a
-                      href="/"
-                      className={cn(
-                        buttonVariants({ variant: "ghost", size: "lg" }),
-                        "text-slate-200 hover:bg-white/10 hover:text-white"
-                      )}
-                    >
-                      返回资产总览
-                    </a>
+                    <div className="flex flex-wrap gap-2">
+                      <a
+                        href="/assistant"
+                        className={cn(
+                          buttonVariants({ variant: "ghost", size: "lg" }),
+                          "text-slate-200 hover:bg-white/10 hover:text-white"
+                        )}
+                      >
+                        返回 Assistant
+                      </a>
+                      <a
+                        href="/"
+                        className={cn(
+                          buttonVariants({ variant: "ghost", size: "lg" }),
+                          "text-slate-200 hover:bg-white/10 hover:text-white"
+                        )}
+                      >
+                        返回产品入口
+                      </a>
+                    </div>
                   ) : null}
                 </div>
 
@@ -154,6 +176,6 @@ export function DashboardAssetLibraryPage({
           })}
         </div>
       </div>
-    </main>
+    </ProductShell>
   )
 }

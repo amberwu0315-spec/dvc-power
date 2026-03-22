@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as BaoxiniaoRouteImport } from './routes/baoxiniao'
+import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TemplatesIndexRouteImport } from './routes/templates/index'
 import { Route as CasesIndexRouteImport } from './routes/cases/index'
@@ -19,6 +20,11 @@ import { Route as CasesBaoxiniaoCarbonCockpitRouteImport } from './routes/cases/
 const BaoxiniaoRoute = BaoxiniaoRouteImport.update({
   id: '/baoxiniao',
   path: '/baoxiniao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssistantRoute = AssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -51,6 +57,7 @@ const CasesBaoxiniaoCarbonCockpitRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/baoxiniao': typeof BaoxiniaoRoute
   '/cases/baoxiniao-carbon-cockpit': typeof CasesBaoxiniaoCarbonCockpitRoute
   '/templates/manufacturing-carbon-overview': typeof TemplatesManufacturingCarbonOverviewRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/baoxiniao': typeof BaoxiniaoRoute
   '/cases/baoxiniao-carbon-cockpit': typeof CasesBaoxiniaoCarbonCockpitRoute
   '/templates/manufacturing-carbon-overview': typeof TemplatesManufacturingCarbonOverviewRoute
@@ -68,6 +76,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/baoxiniao': typeof BaoxiniaoRoute
   '/cases/baoxiniao-carbon-cockpit': typeof CasesBaoxiniaoCarbonCockpitRoute
   '/templates/manufacturing-carbon-overview': typeof TemplatesManufacturingCarbonOverviewRoute
@@ -78,6 +87,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/assistant'
     | '/baoxiniao'
     | '/cases/baoxiniao-carbon-cockpit'
     | '/templates/manufacturing-carbon-overview'
@@ -86,6 +96,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/assistant'
     | '/baoxiniao'
     | '/cases/baoxiniao-carbon-cockpit'
     | '/templates/manufacturing-carbon-overview'
@@ -94,6 +105,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/assistant'
     | '/baoxiniao'
     | '/cases/baoxiniao-carbon-cockpit'
     | '/templates/manufacturing-carbon-overview'
@@ -103,6 +115,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AssistantRoute: typeof AssistantRoute
   BaoxiniaoRoute: typeof BaoxiniaoRoute
   CasesBaoxiniaoCarbonCockpitRoute: typeof CasesBaoxiniaoCarbonCockpitRoute
   TemplatesManufacturingCarbonOverviewRoute: typeof TemplatesManufacturingCarbonOverviewRoute
@@ -117,6 +130,13 @@ declare module '@tanstack/react-router' {
       path: '/baoxiniao'
       fullPath: '/baoxiniao'
       preLoaderRoute: typeof BaoxiniaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assistant': {
+      id: '/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof AssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -159,6 +179,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AssistantRoute: AssistantRoute,
   BaoxiniaoRoute: BaoxiniaoRoute,
   CasesBaoxiniaoCarbonCockpitRoute: CasesBaoxiniaoCarbonCockpitRoute,
   TemplatesManufacturingCarbonOverviewRoute:

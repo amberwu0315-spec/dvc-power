@@ -1,23 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router"
 
-import { DashboardAssetLibraryPage } from "@/components/navigation/dashboard-asset-library-page"
+import { ProductEntryPage } from "@/features/home/product-entry-page"
 
 export const Route = createFileRoute("/")({
-  component: DashboardAssetLibraryHomePage,
+  component: ProductHomePage,
   head: () => ({
     meta: [
       {
-        title: "驾驶舱资产目录 | DVS Power",
+        title: "定制化驾驶舱 AI 配置助手 V0 | DVS Power",
       },
       {
         name: "description",
         content:
-          "统一查看通用模板和具体案例的入口页，明确模板复用与案例派生的组织方式。",
+          "产品入口页，说明 AI 配置助手 V0 的定位、边界，以及 assistant / templates / cases 三层入口。",
       },
     ],
   }),
 })
 
-export function DashboardAssetLibraryHomePage() {
-  return <DashboardAssetLibraryPage />
+export function ProductHomePage() {
+  return <ProductEntryPage />
 }

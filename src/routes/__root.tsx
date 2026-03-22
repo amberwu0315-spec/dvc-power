@@ -15,12 +15,12 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "DVS Power",
+        title: "DVS Power | 定制化驾驶舱 AI 配置助手 V0",
       },
       {
         name: "description",
         content:
-          "TanStack Start + React 19 + Tailwind CSS v4 + shadcn/ui base-mira baseline.",
+          "面向驾驶舱前置方案阶段的 AI 配置助手 V0，聚焦需求到页面草案的整理与输出。",
       },
     ],
     links: [
